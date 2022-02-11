@@ -5,15 +5,22 @@ use crate::{
 };
 
 use rslint_parser::ast::JsAssignmentWithDefault;
+use rslint_parser::ast::JsAssignmentWithDefaultSlots;
 
 impl ToFormatElement for JsAssignmentWithDefault {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
+        let JsAssignmentWithDefaultSlots {
+            pattern,
+            eq_token,
+            default,
+        } = self.as_slots();
+
         Ok(format_elements![
-            self.pattern().format(formatter)?,
+            pattern.format(formatter)?,
             space_token(),
-            self.eq_token().format(formatter)?,
+            eq_token.format(formatter)?,
             space_token(),
-            self.default().format(formatter)?,
+            default.format(formatter)?,
         ])
     }
 }

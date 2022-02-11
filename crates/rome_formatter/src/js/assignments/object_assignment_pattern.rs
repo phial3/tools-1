@@ -4,23 +4,30 @@ use crate::{
 };
 
 use rslint_parser::ast::JsObjectAssignmentPattern;
+use rslint_parser::ast::JsObjectAssignmentPatternSlots;
 
 impl ToFormatElement for JsObjectAssignmentPattern {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
+        let JsObjectAssignmentPatternSlots {
+            l_curly_token,
+            properties,
+            r_curly_token,
+        } = self.as_slots();
+
         Ok(group_elements(formatter.format_delimited(
-            &self.l_curly_token()?,
+            &l_curly_token?,
             |open_token_trailing, close_token_leading| {
                 Ok(format_elements![
                     space_token(),
                     soft_block_indent(format_elements![
                         open_token_trailing,
-                        self.properties().format(formatter)?,
+                        properties.format(formatter)?,
                         close_token_leading
                     ]),
                     space_token(),
                 ])
             },
-            &self.r_curly_token()?,
+            &r_curly_token?,
         )?))
     }
 }

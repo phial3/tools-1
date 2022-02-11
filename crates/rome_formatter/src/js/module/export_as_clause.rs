@@ -5,11 +5,17 @@ use crate::{
 };
 
 use rslint_parser::ast::JsExportAsClause;
+use rslint_parser::ast::JsExportAsClauseSlots;
 
 impl ToFormatElement for JsExportAsClause {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
-        let as_token = self.as_token().format(formatter)?;
-        let exported_name = self.exported_name().format(formatter)?;
+        let JsExportAsClauseSlots {
+            as_token,
+            exported_name,
+        } = self.as_slots();
+
+        let as_token = as_token.format(formatter)?;
+        let exported_name = exported_name.format(formatter)?;
 
         Ok(format_elements![as_token, space_token(), exported_name])
     }

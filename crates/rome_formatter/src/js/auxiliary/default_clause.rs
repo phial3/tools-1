@@ -8,12 +8,19 @@ use crate::{
 };
 
 use rslint_parser::ast::JsDefaultClause;
+use rslint_parser::ast::JsDefaultClauseSlots;
 
 impl ToFormatElement for JsDefaultClause {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
-        let default = self.default_token().format(formatter)?;
-        let colon = self.colon_token().format(formatter)?;
-        let statements = formatter.format_list(self.consequent());
+        let JsDefaultClauseSlots {
+            default_token,
+            colon_token,
+            consequent,
+        } = self.as_slots();
+
+        let default = default_token.format(formatter)?;
+        let colon = colon_token.format(formatter)?;
+        let statements = formatter.format_list(consequent);
 
         Ok(format_elements![
             default,

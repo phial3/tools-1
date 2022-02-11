@@ -5,12 +5,19 @@ use crate::{
 };
 
 use rslint_parser::ast::JsImport;
+use rslint_parser::ast::JsImportSlots;
 
 impl ToFormatElement for JsImport {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
-        let import_token = self.import_token().format(formatter)?;
-        let import_clause = self.import_clause().format(formatter)?;
-        let semicolon = self.semicolon_token().format_or(formatter, || token(";"))?;
+        let JsImportSlots {
+            import_token,
+            import_clause,
+            semicolon_token,
+        } = self.as_slots();
+
+        let import_token = import_token.format(formatter)?;
+        let import_clause = import_clause.format(formatter)?;
+        let semicolon = semicolon_token.format_or(formatter, || token(";"))?;
 
         Ok(format_elements![
             import_token,

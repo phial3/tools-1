@@ -5,14 +5,21 @@ use crate::{
 };
 
 use rslint_parser::ast::JsSequenceExpression;
+use rslint_parser::ast::JsSequenceExpressionSlots;
 
 impl ToFormatElement for JsSequenceExpression {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
+        let JsSequenceExpressionSlots {
+            left,
+            comma_token,
+            right,
+        } = self.as_slots();
+
         Ok(format_elements![
-            self.left().format(formatter)?,
-            self.comma_token().format(formatter)?,
+            left.format(formatter)?,
+            comma_token.format(formatter)?,
             space_token(),
-            self.right().format(formatter)?,
+            right.format(formatter)?,
         ])
     }
 }

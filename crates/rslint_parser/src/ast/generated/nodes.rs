@@ -19,6 +19,13 @@ impl ImportMeta {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> ImportMetaSlots {
+        ImportMetaSlots {
+            import_token: self.import_token(),
+            dot_token: self.dot_token(),
+            meta_token: self.meta_token(),
+        }
+    }
     pub fn import_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -28,6 +35,11 @@ impl ImportMeta {
     pub fn meta_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct ImportMetaSlots {
+    pub import_token: SyntaxResult<SyntaxToken>,
+    pub dot_token: SyntaxResult<SyntaxToken>,
+    pub meta_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsArrayAssignmentPattern {
@@ -41,6 +53,13 @@ impl JsArrayAssignmentPattern {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsArrayAssignmentPatternSlots {
+        JsArrayAssignmentPatternSlots {
+            l_brack_token: self.l_brack_token(),
+            elements: self.elements(),
+            r_brack_token: self.r_brack_token(),
+        }
+    }
     pub fn l_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -50,6 +69,11 @@ impl JsArrayAssignmentPattern {
     pub fn r_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsArrayAssignmentPatternSlots {
+    pub l_brack_token: SyntaxResult<SyntaxToken>,
+    pub elements: JsArrayAssignmentPatternElementList,
+    pub r_brack_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsArrayAssignmentPatternRestElement {
@@ -63,12 +87,22 @@ impl JsArrayAssignmentPatternRestElement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsArrayAssignmentPatternRestElementSlots {
+        JsArrayAssignmentPatternRestElementSlots {
+            dotdotdot_token: self.dotdotdot_token(),
+            pattern: self.pattern(),
+        }
+    }
     pub fn dotdotdot_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn pattern(&self) -> SyntaxResult<JsAnyAssignmentPattern> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsArrayAssignmentPatternRestElementSlots {
+    pub dotdotdot_token: SyntaxResult<SyntaxToken>,
+    pub pattern: SyntaxResult<JsAnyAssignmentPattern>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsArrayBindingPattern {
@@ -82,6 +116,13 @@ impl JsArrayBindingPattern {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsArrayBindingPatternSlots {
+        JsArrayBindingPatternSlots {
+            l_brack_token: self.l_brack_token(),
+            elements: self.elements(),
+            r_brack_token: self.r_brack_token(),
+        }
+    }
     pub fn l_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -91,6 +132,11 @@ impl JsArrayBindingPattern {
     pub fn r_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsArrayBindingPatternSlots {
+    pub l_brack_token: SyntaxResult<SyntaxToken>,
+    pub elements: JsArrayBindingPatternElementList,
+    pub r_brack_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsArrayBindingPatternRestElement {
@@ -104,12 +150,22 @@ impl JsArrayBindingPatternRestElement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsArrayBindingPatternRestElementSlots {
+        JsArrayBindingPatternRestElementSlots {
+            dotdotdot_token: self.dotdotdot_token(),
+            pattern: self.pattern(),
+        }
+    }
     pub fn dotdotdot_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn pattern(&self) -> SyntaxResult<JsAnyBindingPattern> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsArrayBindingPatternRestElementSlots {
+    pub dotdotdot_token: SyntaxResult<SyntaxToken>,
+    pub pattern: SyntaxResult<JsAnyBindingPattern>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsArrayExpression {
@@ -123,6 +179,13 @@ impl JsArrayExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsArrayExpressionSlots {
+        JsArrayExpressionSlots {
+            l_brack_token: self.l_brack_token(),
+            elements: self.elements(),
+            r_brack_token: self.r_brack_token(),
+        }
+    }
     pub fn l_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -130,6 +193,11 @@ impl JsArrayExpression {
     pub fn r_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsArrayExpressionSlots {
+    pub l_brack_token: SyntaxResult<SyntaxToken>,
+    pub elements: JsArrayElementList,
+    pub r_brack_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsArrayHole {
@@ -143,7 +211,9 @@ impl JsArrayHole {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsArrayHoleSlots { JsArrayHoleSlots {} }
 }
+pub struct JsArrayHoleSlots {}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsArrowFunctionExpression {
     pub(crate) syntax: SyntaxNode,
@@ -156,6 +226,16 @@ impl JsArrowFunctionExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsArrowFunctionExpressionSlots {
+        JsArrowFunctionExpressionSlots {
+            async_token: self.async_token(),
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            return_type_annotation: self.return_type_annotation(),
+            fat_arrow_token: self.fat_arrow_token(),
+            body: self.body(),
+        }
+    }
     pub fn async_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn type_parameters(&self) -> Option<TsTypeParameters> {
         support::node(&self.syntax, 1usize)
@@ -173,6 +253,14 @@ impl JsArrowFunctionExpression {
         support::required_node(&self.syntax, 5usize)
     }
 }
+pub struct JsArrowFunctionExpressionSlots {
+    pub async_token: Option<SyntaxToken>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsAnyArrowFunctionParameters>,
+    pub return_type_annotation: Option<TsReturnTypeAnnotation>,
+    pub fat_arrow_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsAnyFunctionBody>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsAssignmentExpression {
     pub(crate) syntax: SyntaxNode,
@@ -185,6 +273,13 @@ impl JsAssignmentExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsAssignmentExpressionSlots {
+        JsAssignmentExpressionSlots {
+            left: self.left(),
+            operator_token: self.operator_token(),
+            right: self.right(),
+        }
+    }
     pub fn left(&self) -> SyntaxResult<JsAnyAssignmentPattern> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -194,6 +289,11 @@ impl JsAssignmentExpression {
     pub fn right(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsAssignmentExpressionSlots {
+    pub left: SyntaxResult<JsAnyAssignmentPattern>,
+    pub operator_token: SyntaxResult<SyntaxToken>,
+    pub right: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsAssignmentWithDefault {
@@ -207,6 +307,13 @@ impl JsAssignmentWithDefault {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsAssignmentWithDefaultSlots {
+        JsAssignmentWithDefaultSlots {
+            pattern: self.pattern(),
+            eq_token: self.eq_token(),
+            default: self.default(),
+        }
+    }
     pub fn pattern(&self) -> SyntaxResult<JsAnyAssignmentPattern> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -216,6 +323,11 @@ impl JsAssignmentWithDefault {
     pub fn default(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsAssignmentWithDefaultSlots {
+    pub pattern: SyntaxResult<JsAnyAssignmentPattern>,
+    pub eq_token: SyntaxResult<SyntaxToken>,
+    pub default: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsAwaitExpression {
@@ -229,12 +341,22 @@ impl JsAwaitExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsAwaitExpressionSlots {
+        JsAwaitExpressionSlots {
+            await_token: self.await_token(),
+            argument: self.argument(),
+        }
+    }
     pub fn await_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn argument(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsAwaitExpressionSlots {
+    pub await_token: SyntaxResult<SyntaxToken>,
+    pub argument: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsBigIntLiteralExpression {
@@ -248,9 +370,17 @@ impl JsBigIntLiteralExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsBigIntLiteralExpressionSlots {
+        JsBigIntLiteralExpressionSlots {
+            value_token: self.value_token(),
+        }
+    }
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsBigIntLiteralExpressionSlots {
+    pub value_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsBinaryExpression {
@@ -264,6 +394,13 @@ impl JsBinaryExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsBinaryExpressionSlots {
+        JsBinaryExpressionSlots {
+            left: self.left(),
+            operator: self.operator(),
+            right: self.right(),
+        }
+    }
     pub fn left(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -273,6 +410,11 @@ impl JsBinaryExpression {
     pub fn right(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsBinaryExpressionSlots {
+    pub left: SyntaxResult<JsAnyExpression>,
+    pub operator: SyntaxResult<SyntaxToken>,
+    pub right: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsBindingPatternWithDefault {
@@ -286,6 +428,13 @@ impl JsBindingPatternWithDefault {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsBindingPatternWithDefaultSlots {
+        JsBindingPatternWithDefaultSlots {
+            pattern: self.pattern(),
+            eq_token: self.eq_token(),
+            default: self.default(),
+        }
+    }
     pub fn pattern(&self) -> SyntaxResult<JsAnyBindingPattern> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -295,6 +444,11 @@ impl JsBindingPatternWithDefault {
     pub fn default(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsBindingPatternWithDefaultSlots {
+    pub pattern: SyntaxResult<JsAnyBindingPattern>,
+    pub eq_token: SyntaxResult<SyntaxToken>,
+    pub default: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsBlockStatement {
@@ -308,6 +462,13 @@ impl JsBlockStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsBlockStatementSlots {
+        JsBlockStatementSlots {
+            l_curly_token: self.l_curly_token(),
+            statements: self.statements(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn l_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -315,6 +476,11 @@ impl JsBlockStatement {
     pub fn r_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsBlockStatementSlots {
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub statements: JsStatementList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsBooleanLiteralExpression {
@@ -328,9 +494,17 @@ impl JsBooleanLiteralExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsBooleanLiteralExpressionSlots {
+        JsBooleanLiteralExpressionSlots {
+            value_token: self.value_token(),
+        }
+    }
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsBooleanLiteralExpressionSlots {
+    pub value_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsBreakStatement {
@@ -344,11 +518,23 @@ impl JsBreakStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsBreakStatementSlots {
+        JsBreakStatementSlots {
+            break_token: self.break_token(),
+            label_token: self.label_token(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn break_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn label_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 2usize) }
+}
+pub struct JsBreakStatementSlots {
+    pub break_token: SyntaxResult<SyntaxToken>,
+    pub label_token: Option<SyntaxToken>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsCallArguments {
@@ -362,6 +548,13 @@ impl JsCallArguments {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsCallArgumentsSlots {
+        JsCallArgumentsSlots {
+            l_paren_token: self.l_paren_token(),
+            args: self.args(),
+            r_paren_token: self.r_paren_token(),
+        }
+    }
     pub fn l_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -369,6 +562,11 @@ impl JsCallArguments {
     pub fn r_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsCallArgumentsSlots {
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub args: JsCallArgumentList,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsCallExpression {
@@ -382,6 +580,14 @@ impl JsCallExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsCallExpressionSlots {
+        JsCallExpressionSlots {
+            callee: self.callee(),
+            optional_chain_token_token: self.optional_chain_token_token(),
+            type_arguments: self.type_arguments(),
+            arguments: self.arguments(),
+        }
+    }
     pub fn callee(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -392,6 +598,12 @@ impl JsCallExpression {
     pub fn arguments(&self) -> SyntaxResult<JsCallArguments> {
         support::required_node(&self.syntax, 3usize)
     }
+}
+pub struct JsCallExpressionSlots {
+    pub callee: SyntaxResult<JsAnyExpression>,
+    pub optional_chain_token_token: Option<SyntaxToken>,
+    pub type_arguments: Option<TsTypeArguments>,
+    pub arguments: SyntaxResult<JsCallArguments>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsCaseClause {
@@ -405,6 +617,14 @@ impl JsCaseClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsCaseClauseSlots {
+        JsCaseClauseSlots {
+            case_token: self.case_token(),
+            test: self.test(),
+            colon_token: self.colon_token(),
+            consequent: self.consequent(),
+        }
+    }
     pub fn case_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -415,6 +635,12 @@ impl JsCaseClause {
         support::required_token(&self.syntax, 2usize)
     }
     pub fn consequent(&self) -> JsStatementList { support::list(&self.syntax, 3usize) }
+}
+pub struct JsCaseClauseSlots {
+    pub case_token: SyntaxResult<SyntaxToken>,
+    pub test: SyntaxResult<JsAnyExpression>,
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub consequent: JsStatementList,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsCatchClause {
@@ -428,6 +654,13 @@ impl JsCatchClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsCatchClauseSlots {
+        JsCatchClauseSlots {
+            catch_token: self.catch_token(),
+            declaration: self.declaration(),
+            body: self.body(),
+        }
+    }
     pub fn catch_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -435,6 +668,11 @@ impl JsCatchClause {
     pub fn body(&self) -> SyntaxResult<JsBlockStatement> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsCatchClauseSlots {
+    pub catch_token: SyntaxResult<SyntaxToken>,
+    pub declaration: Option<JsCatchDeclaration>,
+    pub body: SyntaxResult<JsBlockStatement>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsCatchDeclaration {
@@ -448,6 +686,13 @@ impl JsCatchDeclaration {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsCatchDeclarationSlots {
+        JsCatchDeclarationSlots {
+            l_paren_token: self.l_paren_token(),
+            binding: self.binding(),
+            r_paren_token: self.r_paren_token(),
+        }
+    }
     pub fn l_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -457,6 +702,11 @@ impl JsCatchDeclaration {
     pub fn r_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsCatchDeclarationSlots {
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub binding: SyntaxResult<JsAnyBindingPattern>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsClassDeclaration {
@@ -470,6 +720,18 @@ impl JsClassDeclaration {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsClassDeclarationSlots {
+        JsClassDeclarationSlots {
+            class_token: self.class_token(),
+            id: self.id(),
+            type_parameters: self.type_parameters(),
+            extends_clause: self.extends_clause(),
+            implements_clause: self.implements_clause(),
+            l_curly_token: self.l_curly_token(),
+            members: self.members(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn class_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -489,6 +751,16 @@ impl JsClassDeclaration {
         support::required_token(&self.syntax, 7usize)
     }
 }
+pub struct JsClassDeclarationSlots {
+    pub class_token: SyntaxResult<SyntaxToken>,
+    pub id: SyntaxResult<JsAnyBinding>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub extends_clause: Option<JsExtendsClause>,
+    pub implements_clause: Option<TsImplementsClause>,
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub members: JsClassMemberList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsClassExpression {
     pub(crate) syntax: SyntaxNode,
@@ -501,6 +773,18 @@ impl JsClassExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsClassExpressionSlots {
+        JsClassExpressionSlots {
+            class_token: self.class_token(),
+            id: self.id(),
+            type_parameters: self.type_parameters(),
+            extends_clause: self.extends_clause(),
+            implements_clause: self.implements_clause(),
+            l_curly_token: self.l_curly_token(),
+            members: self.members(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn class_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -520,6 +804,16 @@ impl JsClassExpression {
         support::required_token(&self.syntax, 7usize)
     }
 }
+pub struct JsClassExpressionSlots {
+    pub class_token: SyntaxResult<SyntaxToken>,
+    pub id: Option<JsAnyBinding>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub extends_clause: Option<JsExtendsClause>,
+    pub implements_clause: Option<TsImplementsClause>,
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub members: JsClassMemberList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsComputedMemberAssignment {
     pub(crate) syntax: SyntaxNode,
@@ -532,6 +826,14 @@ impl JsComputedMemberAssignment {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsComputedMemberAssignmentSlots {
+        JsComputedMemberAssignmentSlots {
+            object: self.object(),
+            l_brack_token: self.l_brack_token(),
+            member: self.member(),
+            r_brack_token: self.r_brack_token(),
+        }
+    }
     pub fn object(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -545,6 +847,12 @@ impl JsComputedMemberAssignment {
         support::required_token(&self.syntax, 3usize)
     }
 }
+pub struct JsComputedMemberAssignmentSlots {
+    pub object: SyntaxResult<JsAnyExpression>,
+    pub l_brack_token: SyntaxResult<SyntaxToken>,
+    pub member: SyntaxResult<JsAnyExpression>,
+    pub r_brack_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsComputedMemberExpression {
     pub(crate) syntax: SyntaxNode,
@@ -557,6 +865,15 @@ impl JsComputedMemberExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsComputedMemberExpressionSlots {
+        JsComputedMemberExpressionSlots {
+            object: self.object(),
+            optional_chain_token: self.optional_chain_token(),
+            l_brack_token: self.l_brack_token(),
+            member: self.member(),
+            r_brack_token: self.r_brack_token(),
+        }
+    }
     pub fn object(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -573,6 +890,13 @@ impl JsComputedMemberExpression {
         support::required_token(&self.syntax, 4usize)
     }
 }
+pub struct JsComputedMemberExpressionSlots {
+    pub object: SyntaxResult<JsAnyExpression>,
+    pub optional_chain_token: Option<SyntaxToken>,
+    pub l_brack_token: SyntaxResult<SyntaxToken>,
+    pub member: SyntaxResult<JsAnyExpression>,
+    pub r_brack_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsComputedMemberName {
     pub(crate) syntax: SyntaxNode,
@@ -585,6 +909,13 @@ impl JsComputedMemberName {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsComputedMemberNameSlots {
+        JsComputedMemberNameSlots {
+            l_brack_token: self.l_brack_token(),
+            expression: self.expression(),
+            r_brack_token: self.r_brack_token(),
+        }
+    }
     pub fn l_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -594,6 +925,11 @@ impl JsComputedMemberName {
     pub fn r_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsComputedMemberNameSlots {
+    pub l_brack_token: SyntaxResult<SyntaxToken>,
+    pub expression: SyntaxResult<JsAnyExpression>,
+    pub r_brack_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsConditionalExpression {
@@ -607,6 +943,15 @@ impl JsConditionalExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsConditionalExpressionSlots {
+        JsConditionalExpressionSlots {
+            test: self.test(),
+            question_mark_token: self.question_mark_token(),
+            consequent: self.consequent(),
+            colon_token: self.colon_token(),
+            alternate: self.alternate(),
+        }
+    }
     pub fn test(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -623,6 +968,13 @@ impl JsConditionalExpression {
         support::required_node(&self.syntax, 4usize)
     }
 }
+pub struct JsConditionalExpressionSlots {
+    pub test: SyntaxResult<JsAnyExpression>,
+    pub question_mark_token: SyntaxResult<SyntaxToken>,
+    pub consequent: SyntaxResult<JsAnyExpression>,
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub alternate: SyntaxResult<JsAnyExpression>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsConstructorClassMember {
     pub(crate) syntax: SyntaxNode,
@@ -635,6 +987,14 @@ impl JsConstructorClassMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsConstructorClassMemberSlots {
+        JsConstructorClassMemberSlots {
+            access_modifier: self.access_modifier(),
+            name: self.name(),
+            parameters: self.parameters(),
+            body: self.body(),
+        }
+    }
     pub fn access_modifier(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn name(&self) -> SyntaxResult<JsLiteralMemberName> {
         support::required_node(&self.syntax, 1usize)
@@ -645,6 +1005,12 @@ impl JsConstructorClassMember {
     pub fn body(&self) -> SyntaxResult<JsFunctionBody> {
         support::required_node(&self.syntax, 3usize)
     }
+}
+pub struct JsConstructorClassMemberSlots {
+    pub access_modifier: Option<SyntaxToken>,
+    pub name: SyntaxResult<JsLiteralMemberName>,
+    pub parameters: SyntaxResult<JsConstructorParameters>,
+    pub body: SyntaxResult<JsFunctionBody>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsConstructorParameters {
@@ -658,6 +1024,13 @@ impl JsConstructorParameters {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsConstructorParametersSlots {
+        JsConstructorParametersSlots {
+            l_paren_token: self.l_paren_token(),
+            parameters: self.parameters(),
+            r_paren_token: self.r_paren_token(),
+        }
+    }
     pub fn l_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -665,6 +1038,11 @@ impl JsConstructorParameters {
     pub fn r_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsConstructorParametersSlots {
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub parameters: JsConstructorParameterList,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsContinueStatement {
@@ -678,11 +1056,23 @@ impl JsContinueStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsContinueStatementSlots {
+        JsContinueStatementSlots {
+            continue_token: self.continue_token(),
+            label_token: self.label_token(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn continue_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn label_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 2usize) }
+}
+pub struct JsContinueStatementSlots {
+    pub continue_token: SyntaxResult<SyntaxToken>,
+    pub label_token: Option<SyntaxToken>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsDebuggerStatement {
@@ -696,10 +1086,20 @@ impl JsDebuggerStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsDebuggerStatementSlots {
+        JsDebuggerStatementSlots {
+            debugger_token: self.debugger_token(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn debugger_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
+}
+pub struct JsDebuggerStatementSlots {
+    pub debugger_token: SyntaxResult<SyntaxToken>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsDefaultClause {
@@ -713,6 +1113,13 @@ impl JsDefaultClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsDefaultClauseSlots {
+        JsDefaultClauseSlots {
+            default_token: self.default_token(),
+            colon_token: self.colon_token(),
+            consequent: self.consequent(),
+        }
+    }
     pub fn default_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -720,6 +1127,11 @@ impl JsDefaultClause {
         support::required_token(&self.syntax, 1usize)
     }
     pub fn consequent(&self) -> JsStatementList { support::list(&self.syntax, 2usize) }
+}
+pub struct JsDefaultClauseSlots {
+    pub default_token: SyntaxResult<SyntaxToken>,
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub consequent: JsStatementList,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsDefaultImportSpecifier {
@@ -733,12 +1145,22 @@ impl JsDefaultImportSpecifier {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsDefaultImportSpecifierSlots {
+        JsDefaultImportSpecifierSlots {
+            local_name: self.local_name(),
+            trailing_comma_token: self.trailing_comma_token(),
+        }
+    }
     pub fn local_name(&self) -> SyntaxResult<JsAnyBinding> {
         support::required_node(&self.syntax, 0usize)
     }
     pub fn trailing_comma_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
+}
+pub struct JsDefaultImportSpecifierSlots {
+    pub local_name: SyntaxResult<JsAnyBinding>,
+    pub trailing_comma_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsDirective {
@@ -752,10 +1174,20 @@ impl JsDirective {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsDirectiveSlots {
+        JsDirectiveSlots {
+            value_token: self.value_token(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
+}
+pub struct JsDirectiveSlots {
+    pub value_token: SyntaxResult<SyntaxToken>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsDoWhileStatement {
@@ -769,6 +1201,17 @@ impl JsDoWhileStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsDoWhileStatementSlots {
+        JsDoWhileStatementSlots {
+            do_token: self.do_token(),
+            body: self.body(),
+            while_token: self.while_token(),
+            l_paren_token: self.l_paren_token(),
+            test: self.test(),
+            r_paren_token: self.r_paren_token(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn do_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -789,6 +1232,15 @@ impl JsDoWhileStatement {
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 6usize) }
 }
+pub struct JsDoWhileStatementSlots {
+    pub do_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsAnyStatement>,
+    pub while_token: SyntaxResult<SyntaxToken>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub test: SyntaxResult<JsAnyExpression>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub semicolon_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsElseClause {
     pub(crate) syntax: SyntaxNode,
@@ -801,12 +1253,22 @@ impl JsElseClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsElseClauseSlots {
+        JsElseClauseSlots {
+            else_token: self.else_token(),
+            alternate: self.alternate(),
+        }
+    }
     pub fn else_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn alternate(&self) -> SyntaxResult<JsAnyStatement> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsElseClauseSlots {
+    pub else_token: SyntaxResult<SyntaxToken>,
+    pub alternate: SyntaxResult<JsAnyStatement>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsEmptyClassMember {
@@ -820,9 +1282,17 @@ impl JsEmptyClassMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsEmptyClassMemberSlots {
+        JsEmptyClassMemberSlots {
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn semicolon_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsEmptyClassMemberSlots {
+    pub semicolon_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsEmptyStatement {
@@ -836,9 +1306,17 @@ impl JsEmptyStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsEmptyStatementSlots {
+        JsEmptyStatementSlots {
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn semicolon_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsEmptyStatementSlots {
+    pub semicolon_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExport {
@@ -852,12 +1330,22 @@ impl JsExport {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportSlots {
+        JsExportSlots {
+            export_token: self.export_token(),
+            export_clause: self.export_clause(),
+        }
+    }
     pub fn export_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn export_clause(&self) -> SyntaxResult<JsAnyExportClause> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsExportSlots {
+    pub export_token: SyntaxResult<SyntaxToken>,
+    pub export_clause: SyntaxResult<JsAnyExportClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportAsClause {
@@ -871,12 +1359,22 @@ impl JsExportAsClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportAsClauseSlots {
+        JsExportAsClauseSlots {
+            as_token: self.as_token(),
+            exported_name: self.exported_name(),
+        }
+    }
     pub fn as_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn exported_name(&self) -> SyntaxResult<JsLiteralExportName> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsExportAsClauseSlots {
+    pub as_token: SyntaxResult<SyntaxToken>,
+    pub exported_name: SyntaxResult<JsLiteralExportName>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportClassClause {
@@ -890,6 +1388,18 @@ impl JsExportClassClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportClassClauseSlots {
+        JsExportClassClauseSlots {
+            class_token: self.class_token(),
+            id: self.id(),
+            type_parameters: self.type_parameters(),
+            extends_clause: self.extends_clause(),
+            implements_clause: self.implements_clause(),
+            l_curly_token: self.l_curly_token(),
+            members: self.members(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn class_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -909,6 +1419,16 @@ impl JsExportClassClause {
         support::required_token(&self.syntax, 7usize)
     }
 }
+pub struct JsExportClassClauseSlots {
+    pub class_token: SyntaxResult<SyntaxToken>,
+    pub id: SyntaxResult<JsAnyBinding>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub extends_clause: Option<JsExtendsClause>,
+    pub implements_clause: Option<TsImplementsClause>,
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub members: JsClassMemberList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportDefaultClassClause {
     pub(crate) syntax: SyntaxNode,
@@ -921,6 +1441,19 @@ impl JsExportDefaultClassClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportDefaultClassClauseSlots {
+        JsExportDefaultClassClauseSlots {
+            default_token: self.default_token(),
+            class_token: self.class_token(),
+            id: self.id(),
+            type_parameters: self.type_parameters(),
+            extends_clause: self.extends_clause(),
+            implements_clause: self.implements_clause(),
+            l_curly_token: self.l_curly_token(),
+            members: self.members(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn default_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -943,6 +1476,17 @@ impl JsExportDefaultClassClause {
         support::required_token(&self.syntax, 8usize)
     }
 }
+pub struct JsExportDefaultClassClauseSlots {
+    pub default_token: SyntaxResult<SyntaxToken>,
+    pub class_token: SyntaxResult<SyntaxToken>,
+    pub id: Option<JsAnyBinding>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub extends_clause: Option<JsExtendsClause>,
+    pub implements_clause: Option<TsImplementsClause>,
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub members: JsClassMemberList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportDefaultExpressionClause {
     pub(crate) syntax: SyntaxNode,
@@ -955,6 +1499,13 @@ impl JsExportDefaultExpressionClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportDefaultExpressionClauseSlots {
+        JsExportDefaultExpressionClauseSlots {
+            default_token: self.default_token(),
+            expression: self.expression(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn default_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -962,6 +1513,11 @@ impl JsExportDefaultExpressionClause {
         support::required_node(&self.syntax, 1usize)
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 2usize) }
+}
+pub struct JsExportDefaultExpressionClauseSlots {
+    pub default_token: SyntaxResult<SyntaxToken>,
+    pub expression: SyntaxResult<JsAnyExpression>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportDefaultFunctionClause {
@@ -975,6 +1531,19 @@ impl JsExportDefaultFunctionClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportDefaultFunctionClauseSlots {
+        JsExportDefaultFunctionClauseSlots {
+            default_token: self.default_token(),
+            async_token: self.async_token(),
+            function_token: self.function_token(),
+            star_token: self.star_token(),
+            id: self.id(),
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            return_type_annotation: self.return_type_annotation(),
+            body: self.body(),
+        }
+    }
     pub fn default_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -997,6 +1566,17 @@ impl JsExportDefaultFunctionClause {
         support::required_node(&self.syntax, 8usize)
     }
 }
+pub struct JsExportDefaultFunctionClauseSlots {
+    pub default_token: SyntaxResult<SyntaxToken>,
+    pub async_token: Option<SyntaxToken>,
+    pub function_token: SyntaxResult<SyntaxToken>,
+    pub star_token: Option<SyntaxToken>,
+    pub id: Option<JsAnyBinding>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub return_type_annotation: Option<TsReturnTypeAnnotation>,
+    pub body: SyntaxResult<JsFunctionBody>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportFromClause {
     pub(crate) syntax: SyntaxNode,
@@ -1009,6 +1589,16 @@ impl JsExportFromClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportFromClauseSlots {
+        JsExportFromClauseSlots {
+            star_token: self.star_token(),
+            export_as: self.export_as(),
+            from_token: self.from_token(),
+            source: self.source(),
+            assertion: self.assertion(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn star_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1022,6 +1612,14 @@ impl JsExportFromClause {
     pub fn assertion(&self) -> Option<JsImportAssertion> { support::node(&self.syntax, 4usize) }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 5usize) }
 }
+pub struct JsExportFromClauseSlots {
+    pub star_token: SyntaxResult<SyntaxToken>,
+    pub export_as: Option<JsExportAsClause>,
+    pub from_token: SyntaxResult<SyntaxToken>,
+    pub source: SyntaxResult<JsModuleSource>,
+    pub assertion: Option<JsImportAssertion>,
+    pub semicolon_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportFunctionClause {
     pub(crate) syntax: SyntaxNode,
@@ -1034,6 +1632,18 @@ impl JsExportFunctionClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportFunctionClauseSlots {
+        JsExportFunctionClauseSlots {
+            async_token: self.async_token(),
+            function_token: self.function_token(),
+            star_token: self.star_token(),
+            id: self.id(),
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            return_type_annotation: self.return_type_annotation(),
+            body: self.body(),
+        }
+    }
     pub fn async_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn function_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
@@ -1053,6 +1663,16 @@ impl JsExportFunctionClause {
         support::required_node(&self.syntax, 7usize)
     }
 }
+pub struct JsExportFunctionClauseSlots {
+    pub async_token: Option<SyntaxToken>,
+    pub function_token: SyntaxResult<SyntaxToken>,
+    pub star_token: Option<SyntaxToken>,
+    pub id: SyntaxResult<JsAnyBinding>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub return_type_annotation: Option<TsReturnTypeAnnotation>,
+    pub body: SyntaxResult<JsFunctionBody>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportNamedClause {
     pub(crate) syntax: SyntaxNode,
@@ -1065,6 +1685,14 @@ impl JsExportNamedClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportNamedClauseSlots {
+        JsExportNamedClauseSlots {
+            l_curly_token: self.l_curly_token(),
+            specifiers: self.specifiers(),
+            r_curly_token: self.r_curly_token(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn l_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1073,6 +1701,12 @@ impl JsExportNamedClause {
         support::required_token(&self.syntax, 2usize)
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 3usize) }
+}
+pub struct JsExportNamedClauseSlots {
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub specifiers: JsExportNamedSpecifierList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportNamedFromClause {
@@ -1086,6 +1720,17 @@ impl JsExportNamedFromClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportNamedFromClauseSlots {
+        JsExportNamedFromClauseSlots {
+            l_curly_token: self.l_curly_token(),
+            specifiers: self.specifiers(),
+            r_curly_token: self.r_curly_token(),
+            from_token: self.from_token(),
+            source: self.source(),
+            assertion: self.assertion(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn l_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1104,6 +1749,15 @@ impl JsExportNamedFromClause {
     pub fn assertion(&self) -> Option<JsImportAssertion> { support::node(&self.syntax, 5usize) }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 6usize) }
 }
+pub struct JsExportNamedFromClauseSlots {
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub specifiers: JsExportNamedFromSpecifierList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
+    pub from_token: SyntaxResult<SyntaxToken>,
+    pub source: SyntaxResult<JsModuleSource>,
+    pub assertion: Option<JsImportAssertion>,
+    pub semicolon_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportNamedFromSpecifier {
     pub(crate) syntax: SyntaxNode,
@@ -1116,11 +1770,23 @@ impl JsExportNamedFromSpecifier {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportNamedFromSpecifierSlots {
+        JsExportNamedFromSpecifierSlots {
+            type_token: self.type_token(),
+            source_name: self.source_name(),
+            export_as: self.export_as(),
+        }
+    }
     pub fn type_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn source_name(&self) -> SyntaxResult<JsLiteralExportName> {
         support::required_node(&self.syntax, 1usize)
     }
     pub fn export_as(&self) -> Option<JsExportAsClause> { support::node(&self.syntax, 2usize) }
+}
+pub struct JsExportNamedFromSpecifierSlots {
+    pub type_token: Option<SyntaxToken>,
+    pub source_name: SyntaxResult<JsLiteralExportName>,
+    pub export_as: Option<JsExportAsClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportNamedShorthandSpecifier {
@@ -1134,10 +1800,20 @@ impl JsExportNamedShorthandSpecifier {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportNamedShorthandSpecifierSlots {
+        JsExportNamedShorthandSpecifierSlots {
+            type_token: self.type_token(),
+            name: self.name(),
+        }
+    }
     pub fn type_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn name(&self) -> SyntaxResult<JsReferenceIdentifier> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsExportNamedShorthandSpecifierSlots {
+    pub type_token: Option<SyntaxToken>,
+    pub name: SyntaxResult<JsReferenceIdentifier>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportNamedSpecifier {
@@ -1151,6 +1827,14 @@ impl JsExportNamedSpecifier {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportNamedSpecifierSlots {
+        JsExportNamedSpecifierSlots {
+            type_token: self.type_token(),
+            local_name: self.local_name(),
+            as_token: self.as_token(),
+            exported_name: self.exported_name(),
+        }
+    }
     pub fn type_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn local_name(&self) -> SyntaxResult<JsReferenceIdentifier> {
         support::required_node(&self.syntax, 1usize)
@@ -1161,6 +1845,12 @@ impl JsExportNamedSpecifier {
     pub fn exported_name(&self) -> SyntaxResult<JsLiteralExportName> {
         support::required_node(&self.syntax, 3usize)
     }
+}
+pub struct JsExportNamedSpecifierSlots {
+    pub type_token: Option<SyntaxToken>,
+    pub local_name: SyntaxResult<JsReferenceIdentifier>,
+    pub as_token: SyntaxResult<SyntaxToken>,
+    pub exported_name: SyntaxResult<JsLiteralExportName>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExportVariableClause {
@@ -1174,10 +1864,20 @@ impl JsExportVariableClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExportVariableClauseSlots {
+        JsExportVariableClauseSlots {
+            declaration: self.declaration(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn declaration(&self) -> SyntaxResult<JsVariableDeclaration> {
         support::required_node(&self.syntax, 0usize)
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
+}
+pub struct JsExportVariableClauseSlots {
+    pub declaration: SyntaxResult<JsVariableDeclaration>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExpressionSnipped {
@@ -1191,12 +1891,22 @@ impl JsExpressionSnipped {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExpressionSnippedSlots {
+        JsExpressionSnippedSlots {
+            expression: self.expression(),
+            eof_token: self.eof_token(),
+        }
+    }
     pub fn expression(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
     pub fn eof_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
+}
+pub struct JsExpressionSnippedSlots {
+    pub expression: SyntaxResult<JsAnyExpression>,
+    pub eof_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExpressionStatement {
@@ -1210,10 +1920,20 @@ impl JsExpressionStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExpressionStatementSlots {
+        JsExpressionStatementSlots {
+            expression: self.expression(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn expression(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
+}
+pub struct JsExpressionStatementSlots {
+    pub expression: SyntaxResult<JsAnyExpression>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsExtendsClause {
@@ -1227,6 +1947,13 @@ impl JsExtendsClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsExtendsClauseSlots {
+        JsExtendsClauseSlots {
+            extends_token: self.extends_token(),
+            super_class: self.super_class(),
+            type_arguments: self.type_arguments(),
+        }
+    }
     pub fn extends_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1234,6 +1961,11 @@ impl JsExtendsClause {
         support::required_node(&self.syntax, 1usize)
     }
     pub fn type_arguments(&self) -> Option<TsTypeArguments> { support::node(&self.syntax, 2usize) }
+}
+pub struct JsExtendsClauseSlots {
+    pub extends_token: SyntaxResult<SyntaxToken>,
+    pub super_class: SyntaxResult<JsAnyExpression>,
+    pub type_arguments: Option<TsTypeArguments>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsFinallyClause {
@@ -1247,12 +1979,22 @@ impl JsFinallyClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsFinallyClauseSlots {
+        JsFinallyClauseSlots {
+            finally_token: self.finally_token(),
+            body: self.body(),
+        }
+    }
     pub fn finally_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn body(&self) -> SyntaxResult<JsBlockStatement> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsFinallyClauseSlots {
+    pub finally_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsBlockStatement>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsForInStatement {
@@ -1266,6 +2008,17 @@ impl JsForInStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsForInStatementSlots {
+        JsForInStatementSlots {
+            for_token: self.for_token(),
+            l_paren_token: self.l_paren_token(),
+            initializer: self.initializer(),
+            in_token: self.in_token(),
+            expression: self.expression(),
+            r_paren_token: self.r_paren_token(),
+            body: self.body(),
+        }
+    }
     pub fn for_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1288,6 +2041,15 @@ impl JsForInStatement {
         support::required_node(&self.syntax, 6usize)
     }
 }
+pub struct JsForInStatementSlots {
+    pub for_token: SyntaxResult<SyntaxToken>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub initializer: SyntaxResult<JsAnyForInOrOfInitializer>,
+    pub in_token: SyntaxResult<SyntaxToken>,
+    pub expression: SyntaxResult<JsAnyExpression>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsAnyStatement>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsForOfStatement {
     pub(crate) syntax: SyntaxNode,
@@ -1300,6 +2062,18 @@ impl JsForOfStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsForOfStatementSlots {
+        JsForOfStatementSlots {
+            for_token: self.for_token(),
+            await_token: self.await_token(),
+            l_paren_token: self.l_paren_token(),
+            initializer: self.initializer(),
+            of_token: self.of_token(),
+            expression: self.expression(),
+            r_paren_token: self.r_paren_token(),
+            body: self.body(),
+        }
+    }
     pub fn for_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1323,6 +2097,16 @@ impl JsForOfStatement {
         support::required_node(&self.syntax, 7usize)
     }
 }
+pub struct JsForOfStatementSlots {
+    pub for_token: SyntaxResult<SyntaxToken>,
+    pub await_token: Option<SyntaxToken>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub initializer: SyntaxResult<JsAnyForInOrOfInitializer>,
+    pub of_token: SyntaxResult<SyntaxToken>,
+    pub expression: SyntaxResult<JsAnyExpression>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsAnyStatement>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsForStatement {
     pub(crate) syntax: SyntaxNode,
@@ -1335,6 +2119,19 @@ impl JsForStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsForStatementSlots {
+        JsForStatementSlots {
+            for_token: self.for_token(),
+            l_paren_token: self.l_paren_token(),
+            initializer: self.initializer(),
+            first_semi_token: self.first_semi_token(),
+            test: self.test(),
+            second_semi_token: self.second_semi_token(),
+            update: self.update(),
+            r_paren_token: self.r_paren_token(),
+            body: self.body(),
+        }
+    }
     pub fn for_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1357,6 +2154,17 @@ impl JsForStatement {
         support::required_node(&self.syntax, 8usize)
     }
 }
+pub struct JsForStatementSlots {
+    pub for_token: SyntaxResult<SyntaxToken>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub initializer: Option<JsAnyForInitializer>,
+    pub first_semi_token: SyntaxResult<SyntaxToken>,
+    pub test: Option<JsAnyExpression>,
+    pub second_semi_token: SyntaxResult<SyntaxToken>,
+    pub update: Option<JsAnyExpression>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsAnyStatement>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsForVariableDeclaration {
     pub(crate) syntax: SyntaxNode,
@@ -1369,12 +2177,22 @@ impl JsForVariableDeclaration {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsForVariableDeclarationSlots {
+        JsForVariableDeclarationSlots {
+            kind_token: self.kind_token(),
+            declarator: self.declarator(),
+        }
+    }
     pub fn kind_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn declarator(&self) -> SyntaxResult<JsVariableDeclarator> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsForVariableDeclarationSlots {
+    pub kind_token: SyntaxResult<SyntaxToken>,
+    pub declarator: SyntaxResult<JsVariableDeclarator>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsFormalParameter {
@@ -1388,6 +2206,14 @@ impl JsFormalParameter {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsFormalParameterSlots {
+        JsFormalParameterSlots {
+            binding: self.binding(),
+            question_mark_token: self.question_mark_token(),
+            type_annotation: self.type_annotation(),
+            initializer: self.initializer(),
+        }
+    }
     pub fn binding(&self) -> SyntaxResult<JsAnyBindingPattern> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -1398,6 +2224,12 @@ impl JsFormalParameter {
         support::node(&self.syntax, 2usize)
     }
     pub fn initializer(&self) -> Option<JsInitializerClause> { support::node(&self.syntax, 3usize) }
+}
+pub struct JsFormalParameterSlots {
+    pub binding: SyntaxResult<JsAnyBindingPattern>,
+    pub question_mark_token: Option<SyntaxToken>,
+    pub type_annotation: Option<TsTypeAnnotation>,
+    pub initializer: Option<JsInitializerClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsFunctionBody {
@@ -1411,6 +2243,14 @@ impl JsFunctionBody {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsFunctionBodySlots {
+        JsFunctionBodySlots {
+            l_curly_token: self.l_curly_token(),
+            directives: self.directives(),
+            statements: self.statements(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn l_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1419,6 +2259,12 @@ impl JsFunctionBody {
     pub fn r_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 3usize)
     }
+}
+pub struct JsFunctionBodySlots {
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub directives: JsDirectiveList,
+    pub statements: JsStatementList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsFunctionDeclaration {
@@ -1432,6 +2278,18 @@ impl JsFunctionDeclaration {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsFunctionDeclarationSlots {
+        JsFunctionDeclarationSlots {
+            async_token: self.async_token(),
+            function_token: self.function_token(),
+            star_token: self.star_token(),
+            id: self.id(),
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            return_type_annotation: self.return_type_annotation(),
+            body: self.body(),
+        }
+    }
     pub fn async_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn function_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
@@ -1451,6 +2309,16 @@ impl JsFunctionDeclaration {
         support::required_node(&self.syntax, 7usize)
     }
 }
+pub struct JsFunctionDeclarationSlots {
+    pub async_token: Option<SyntaxToken>,
+    pub function_token: SyntaxResult<SyntaxToken>,
+    pub star_token: Option<SyntaxToken>,
+    pub id: SyntaxResult<JsAnyBinding>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub return_type_annotation: Option<TsReturnTypeAnnotation>,
+    pub body: SyntaxResult<JsFunctionBody>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsFunctionExpression {
     pub(crate) syntax: SyntaxNode,
@@ -1463,6 +2331,18 @@ impl JsFunctionExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsFunctionExpressionSlots {
+        JsFunctionExpressionSlots {
+            async_token: self.async_token(),
+            function_token: self.function_token(),
+            star_token: self.star_token(),
+            id: self.id(),
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            return_type_annotation: self.return_type_annotation(),
+            body: self.body(),
+        }
+    }
     pub fn async_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn function_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
@@ -1482,6 +2362,16 @@ impl JsFunctionExpression {
         support::required_node(&self.syntax, 7usize)
     }
 }
+pub struct JsFunctionExpressionSlots {
+    pub async_token: Option<SyntaxToken>,
+    pub function_token: SyntaxResult<SyntaxToken>,
+    pub star_token: Option<SyntaxToken>,
+    pub id: Option<JsAnyBinding>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub return_type_annotation: Option<TsReturnTypeAnnotation>,
+    pub body: SyntaxResult<JsFunctionBody>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsGetterClassMember {
     pub(crate) syntax: SyntaxNode,
@@ -1494,6 +2384,19 @@ impl JsGetterClassMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsGetterClassMemberSlots {
+        JsGetterClassMemberSlots {
+            access_modifier: self.access_modifier(),
+            static_token: self.static_token(),
+            abstract_token: self.abstract_token(),
+            get_token: self.get_token(),
+            name: self.name(),
+            l_paren_token: self.l_paren_token(),
+            r_paren_token: self.r_paren_token(),
+            return_type: self.return_type(),
+            body: self.body(),
+        }
+    }
     pub fn access_modifier(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn static_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
     pub fn abstract_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 2usize) }
@@ -1514,6 +2417,17 @@ impl JsGetterClassMember {
         support::required_node(&self.syntax, 8usize)
     }
 }
+pub struct JsGetterClassMemberSlots {
+    pub access_modifier: Option<SyntaxToken>,
+    pub static_token: Option<SyntaxToken>,
+    pub abstract_token: Option<SyntaxToken>,
+    pub get_token: SyntaxResult<SyntaxToken>,
+    pub name: SyntaxResult<JsAnyClassMemberName>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub return_type: Option<TsTypeAnnotation>,
+    pub body: SyntaxResult<JsFunctionBody>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsGetterObjectMember {
     pub(crate) syntax: SyntaxNode,
@@ -1526,6 +2440,16 @@ impl JsGetterObjectMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsGetterObjectMemberSlots {
+        JsGetterObjectMemberSlots {
+            get_token: self.get_token(),
+            name: self.name(),
+            l_paren_token: self.l_paren_token(),
+            r_paren_token: self.r_paren_token(),
+            return_type: self.return_type(),
+            body: self.body(),
+        }
+    }
     pub fn get_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1543,6 +2467,14 @@ impl JsGetterObjectMember {
         support::required_node(&self.syntax, 5usize)
     }
 }
+pub struct JsGetterObjectMemberSlots {
+    pub get_token: SyntaxResult<SyntaxToken>,
+    pub name: SyntaxResult<JsAnyObjectMemberName>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub return_type: Option<TsTypeAnnotation>,
+    pub body: SyntaxResult<JsFunctionBody>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsIdentifierAssignment {
     pub(crate) syntax: SyntaxNode,
@@ -1555,9 +2487,17 @@ impl JsIdentifierAssignment {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsIdentifierAssignmentSlots {
+        JsIdentifierAssignmentSlots {
+            name_token: self.name_token(),
+        }
+    }
     pub fn name_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsIdentifierAssignmentSlots {
+    pub name_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsIdentifierBinding {
@@ -1571,9 +2511,17 @@ impl JsIdentifierBinding {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsIdentifierBindingSlots {
+        JsIdentifierBindingSlots {
+            name_token: self.name_token(),
+        }
+    }
     pub fn name_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsIdentifierBindingSlots {
+    pub name_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsIdentifierExpression {
@@ -1587,9 +2535,15 @@ impl JsIdentifierExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsIdentifierExpressionSlots {
+        JsIdentifierExpressionSlots { name: self.name() }
+    }
     pub fn name(&self) -> SyntaxResult<JsReferenceIdentifier> {
         support::required_node(&self.syntax, 0usize)
     }
+}
+pub struct JsIdentifierExpressionSlots {
+    pub name: SyntaxResult<JsReferenceIdentifier>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsIfStatement {
@@ -1603,6 +2557,16 @@ impl JsIfStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsIfStatementSlots {
+        JsIfStatementSlots {
+            if_token: self.if_token(),
+            l_paren_token: self.l_paren_token(),
+            test: self.test(),
+            r_paren_token: self.r_paren_token(),
+            consequent: self.consequent(),
+            else_clause: self.else_clause(),
+        }
+    }
     pub fn if_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1620,6 +2584,14 @@ impl JsIfStatement {
     }
     pub fn else_clause(&self) -> Option<JsElseClause> { support::node(&self.syntax, 5usize) }
 }
+pub struct JsIfStatementSlots {
+    pub if_token: SyntaxResult<SyntaxToken>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub test: SyntaxResult<JsAnyExpression>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub consequent: SyntaxResult<JsAnyStatement>,
+    pub else_clause: Option<JsElseClause>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsImport {
     pub(crate) syntax: SyntaxNode,
@@ -1632,6 +2604,13 @@ impl JsImport {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsImportSlots {
+        JsImportSlots {
+            import_token: self.import_token(),
+            import_clause: self.import_clause(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn import_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1639,6 +2618,11 @@ impl JsImport {
         support::required_node(&self.syntax, 1usize)
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 2usize) }
+}
+pub struct JsImportSlots {
+    pub import_token: SyntaxResult<SyntaxToken>,
+    pub import_clause: SyntaxResult<AnyJsImportClause>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsImportAssertion {
@@ -1652,6 +2636,14 @@ impl JsImportAssertion {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsImportAssertionSlots {
+        JsImportAssertionSlots {
+            assert_token: self.assert_token(),
+            l_curly_token: self.l_curly_token(),
+            assertions: self.assertions(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn assert_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1662,6 +2654,12 @@ impl JsImportAssertion {
     pub fn r_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 3usize)
     }
+}
+pub struct JsImportAssertionSlots {
+    pub assert_token: SyntaxResult<SyntaxToken>,
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub assertions: JsImportAssertionEntryList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsImportAssertionEntry {
@@ -1675,6 +2673,13 @@ impl JsImportAssertionEntry {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsImportAssertionEntrySlots {
+        JsImportAssertionEntrySlots {
+            key: self.key(),
+            colon_token: self.colon_token(),
+            value_token: self.value_token(),
+        }
+    }
     pub fn key(&self) -> SyntaxResult<SyntaxToken> { support::required_token(&self.syntax, 0usize) }
     pub fn colon_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
@@ -1682,6 +2687,11 @@ impl JsImportAssertionEntry {
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsImportAssertionEntrySlots {
+    pub key: SyntaxResult<SyntaxToken>,
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub value_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsImportBareClause {
@@ -1695,10 +2705,20 @@ impl JsImportBareClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsImportBareClauseSlots {
+        JsImportBareClauseSlots {
+            source: self.source(),
+            assertion: self.assertion(),
+        }
+    }
     pub fn source(&self) -> SyntaxResult<JsModuleSource> {
         support::required_node(&self.syntax, 0usize)
     }
     pub fn assertion(&self) -> Option<JsImportAssertion> { support::node(&self.syntax, 1usize) }
+}
+pub struct JsImportBareClauseSlots {
+    pub source: SyntaxResult<JsModuleSource>,
+    pub assertion: Option<JsImportAssertion>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsImportCallExpression {
@@ -1712,12 +2732,22 @@ impl JsImportCallExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsImportCallExpressionSlots {
+        JsImportCallExpressionSlots {
+            import_token: self.import_token(),
+            arguments: self.arguments(),
+        }
+    }
     pub fn import_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn arguments(&self) -> SyntaxResult<JsCallArguments> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsImportCallExpressionSlots {
+    pub import_token: SyntaxResult<SyntaxToken>,
+    pub arguments: SyntaxResult<JsCallArguments>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsImportDefaultClause {
@@ -1731,6 +2761,14 @@ impl JsImportDefaultClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsImportDefaultClauseSlots {
+        JsImportDefaultClauseSlots {
+            local_name: self.local_name(),
+            from_token: self.from_token(),
+            source: self.source(),
+            assertion: self.assertion(),
+        }
+    }
     pub fn local_name(&self) -> SyntaxResult<JsAnyBinding> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -1741,6 +2779,12 @@ impl JsImportDefaultClause {
         support::required_node(&self.syntax, 2usize)
     }
     pub fn assertion(&self) -> Option<JsImportAssertion> { support::node(&self.syntax, 3usize) }
+}
+pub struct JsImportDefaultClauseSlots {
+    pub local_name: SyntaxResult<JsAnyBinding>,
+    pub from_token: SyntaxResult<SyntaxToken>,
+    pub source: SyntaxResult<JsModuleSource>,
+    pub assertion: Option<JsImportAssertion>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsImportNamedClause {
@@ -1754,6 +2798,15 @@ impl JsImportNamedClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsImportNamedClauseSlots {
+        JsImportNamedClauseSlots {
+            default_specifier: self.default_specifier(),
+            named_import: self.named_import(),
+            from_token: self.from_token(),
+            source: self.source(),
+            assertion: self.assertion(),
+        }
+    }
     pub fn default_specifier(&self) -> Option<JsDefaultImportSpecifier> {
         support::node(&self.syntax, 0usize)
     }
@@ -1768,6 +2821,13 @@ impl JsImportNamedClause {
     }
     pub fn assertion(&self) -> Option<JsImportAssertion> { support::node(&self.syntax, 4usize) }
 }
+pub struct JsImportNamedClauseSlots {
+    pub default_specifier: Option<JsDefaultImportSpecifier>,
+    pub named_import: SyntaxResult<JsAnyNamedImport>,
+    pub from_token: SyntaxResult<SyntaxToken>,
+    pub source: SyntaxResult<JsModuleSource>,
+    pub assertion: Option<JsImportAssertion>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsImportNamespaceClause {
     pub(crate) syntax: SyntaxNode,
@@ -1780,6 +2840,16 @@ impl JsImportNamespaceClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsImportNamespaceClauseSlots {
+        JsImportNamespaceClauseSlots {
+            star_token: self.star_token(),
+            as_token: self.as_token(),
+            local_name: self.local_name(),
+            from_token: self.from_token(),
+            source: self.source(),
+            assertion: self.assertion(),
+        }
+    }
     pub fn star_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1797,6 +2867,14 @@ impl JsImportNamespaceClause {
     }
     pub fn assertion(&self) -> Option<JsImportAssertion> { support::node(&self.syntax, 5usize) }
 }
+pub struct JsImportNamespaceClauseSlots {
+    pub star_token: SyntaxResult<SyntaxToken>,
+    pub as_token: SyntaxResult<SyntaxToken>,
+    pub local_name: SyntaxResult<JsAnyBinding>,
+    pub from_token: SyntaxResult<SyntaxToken>,
+    pub source: SyntaxResult<JsModuleSource>,
+    pub assertion: Option<JsImportAssertion>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsInExpression {
     pub(crate) syntax: SyntaxNode,
@@ -1809,6 +2887,13 @@ impl JsInExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsInExpressionSlots {
+        JsInExpressionSlots {
+            property: self.property(),
+            in_token: self.in_token(),
+            object: self.object(),
+        }
+    }
     pub fn property(&self) -> SyntaxResult<JsAnyInProperty> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -1818,6 +2903,11 @@ impl JsInExpression {
     pub fn object(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsInExpressionSlots {
+    pub property: SyntaxResult<JsAnyInProperty>,
+    pub in_token: SyntaxResult<SyntaxToken>,
+    pub object: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsInitializerClause {
@@ -1831,12 +2921,22 @@ impl JsInitializerClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsInitializerClauseSlots {
+        JsInitializerClauseSlots {
+            eq_token: self.eq_token(),
+            expression: self.expression(),
+        }
+    }
     pub fn eq_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn expression(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsInitializerClauseSlots {
+    pub eq_token: SyntaxResult<SyntaxToken>,
+    pub expression: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsInstanceofExpression {
@@ -1850,6 +2950,13 @@ impl JsInstanceofExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsInstanceofExpressionSlots {
+        JsInstanceofExpressionSlots {
+            left: self.left(),
+            instanceof_token: self.instanceof_token(),
+            right: self.right(),
+        }
+    }
     pub fn left(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -1859,6 +2966,11 @@ impl JsInstanceofExpression {
     pub fn right(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsInstanceofExpressionSlots {
+    pub left: SyntaxResult<JsAnyExpression>,
+    pub instanceof_token: SyntaxResult<SyntaxToken>,
+    pub right: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsLabeledStatement {
@@ -1872,6 +2984,13 @@ impl JsLabeledStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsLabeledStatementSlots {
+        JsLabeledStatementSlots {
+            label_token: self.label_token(),
+            colon_token: self.colon_token(),
+            body: self.body(),
+        }
+    }
     pub fn label_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -1881,6 +3000,11 @@ impl JsLabeledStatement {
     pub fn body(&self) -> SyntaxResult<JsAnyStatement> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsLabeledStatementSlots {
+    pub label_token: SyntaxResult<SyntaxToken>,
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsAnyStatement>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsLiteralExportName {
@@ -1894,9 +3018,17 @@ impl JsLiteralExportName {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsLiteralExportNameSlots {
+        JsLiteralExportNameSlots {
+            value: self.value(),
+        }
+    }
     pub fn value(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsLiteralExportNameSlots {
+    pub value: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsLiteralMemberName {
@@ -1910,9 +3042,17 @@ impl JsLiteralMemberName {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsLiteralMemberNameSlots {
+        JsLiteralMemberNameSlots {
+            value: self.value(),
+        }
+    }
     pub fn value(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsLiteralMemberNameSlots {
+    pub value: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsLogicalExpression {
@@ -1926,6 +3066,13 @@ impl JsLogicalExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsLogicalExpressionSlots {
+        JsLogicalExpressionSlots {
+            left: self.left(),
+            operator: self.operator(),
+            right: self.right(),
+        }
+    }
     pub fn left(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -1935,6 +3082,11 @@ impl JsLogicalExpression {
     pub fn right(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsLogicalExpressionSlots {
+    pub left: SyntaxResult<JsAnyExpression>,
+    pub operator: SyntaxResult<SyntaxToken>,
+    pub right: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsMethodClassMember {
@@ -1948,6 +3100,21 @@ impl JsMethodClassMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsMethodClassMemberSlots {
+        JsMethodClassMemberSlots {
+            access_modifier: self.access_modifier(),
+            static_token: self.static_token(),
+            abstract_token: self.abstract_token(),
+            async_token: self.async_token(),
+            star_token: self.star_token(),
+            name: self.name(),
+            question_mark_token: self.question_mark_token(),
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            return_type_annotation: self.return_type_annotation(),
+            body: self.body(),
+        }
+    }
     pub fn access_modifier(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn static_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
     pub fn abstract_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 2usize) }
@@ -1972,6 +3139,19 @@ impl JsMethodClassMember {
         support::required_node(&self.syntax, 10usize)
     }
 }
+pub struct JsMethodClassMemberSlots {
+    pub access_modifier: Option<SyntaxToken>,
+    pub static_token: Option<SyntaxToken>,
+    pub abstract_token: Option<SyntaxToken>,
+    pub async_token: Option<SyntaxToken>,
+    pub star_token: Option<SyntaxToken>,
+    pub name: SyntaxResult<JsAnyClassMemberName>,
+    pub question_mark_token: SyntaxResult<SyntaxToken>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub return_type_annotation: Option<TsReturnTypeAnnotation>,
+    pub body: SyntaxResult<JsFunctionBody>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsMethodObjectMember {
     pub(crate) syntax: SyntaxNode,
@@ -1984,6 +3164,17 @@ impl JsMethodObjectMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsMethodObjectMemberSlots {
+        JsMethodObjectMemberSlots {
+            async_token: self.async_token(),
+            star_token: self.star_token(),
+            name: self.name(),
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            return_type_annotation: self.return_type_annotation(),
+            body: self.body(),
+        }
+    }
     pub fn async_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn star_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
     pub fn name(&self) -> SyntaxResult<JsAnyObjectMemberName> {
@@ -2002,6 +3193,15 @@ impl JsMethodObjectMember {
         support::required_node(&self.syntax, 6usize)
     }
 }
+pub struct JsMethodObjectMemberSlots {
+    pub async_token: Option<SyntaxToken>,
+    pub star_token: Option<SyntaxToken>,
+    pub name: SyntaxResult<JsAnyObjectMemberName>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub return_type_annotation: Option<TsReturnTypeAnnotation>,
+    pub body: SyntaxResult<JsFunctionBody>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsModule {
     pub(crate) syntax: SyntaxNode,
@@ -2014,12 +3214,26 @@ impl JsModule {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsModuleSlots {
+        JsModuleSlots {
+            interpreter_token: self.interpreter_token(),
+            directives: self.directives(),
+            items: self.items(),
+            eof_token: self.eof_token(),
+        }
+    }
     pub fn interpreter_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn directives(&self) -> JsDirectiveList { support::list(&self.syntax, 1usize) }
     pub fn items(&self) -> JsModuleItemList { support::list(&self.syntax, 2usize) }
     pub fn eof_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 3usize)
     }
+}
+pub struct JsModuleSlots {
+    pub interpreter_token: Option<SyntaxToken>,
+    pub directives: JsDirectiveList,
+    pub items: JsModuleItemList,
+    pub eof_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsModuleSource {
@@ -2033,9 +3247,17 @@ impl JsModuleSource {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsModuleSourceSlots {
+        JsModuleSourceSlots {
+            value_token: self.value_token(),
+        }
+    }
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsModuleSourceSlots {
+    pub value_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsName {
@@ -2049,9 +3271,17 @@ impl JsName {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsNameSlots {
+        JsNameSlots {
+            value_token: self.value_token(),
+        }
+    }
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsNameSlots {
+    pub value_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsNamedImportSpecifier {
@@ -2065,6 +3295,13 @@ impl JsNamedImportSpecifier {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsNamedImportSpecifierSlots {
+        JsNamedImportSpecifierSlots {
+            name: self.name(),
+            as_token: self.as_token(),
+            local_name: self.local_name(),
+        }
+    }
     pub fn name(&self) -> SyntaxResult<JsLiteralExportName> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -2074,6 +3311,11 @@ impl JsNamedImportSpecifier {
     pub fn local_name(&self) -> SyntaxResult<JsAnyBinding> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsNamedImportSpecifierSlots {
+    pub name: SyntaxResult<JsLiteralExportName>,
+    pub as_token: SyntaxResult<SyntaxToken>,
+    pub local_name: SyntaxResult<JsAnyBinding>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsNamedImportSpecifiers {
@@ -2087,6 +3329,13 @@ impl JsNamedImportSpecifiers {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsNamedImportSpecifiersSlots {
+        JsNamedImportSpecifiersSlots {
+            l_curly_token: self.l_curly_token(),
+            specifiers: self.specifiers(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn l_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2094,6 +3343,11 @@ impl JsNamedImportSpecifiers {
     pub fn r_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsNamedImportSpecifiersSlots {
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub specifiers: JsNamedImportSpecifierList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsNamespaceImportSpecifier {
@@ -2107,6 +3361,13 @@ impl JsNamespaceImportSpecifier {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsNamespaceImportSpecifierSlots {
+        JsNamespaceImportSpecifierSlots {
+            star_token: self.star_token(),
+            as_token: self.as_token(),
+            local_name: self.local_name(),
+        }
+    }
     pub fn star_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2116,6 +3377,11 @@ impl JsNamespaceImportSpecifier {
     pub fn local_name(&self) -> SyntaxResult<JsAnyBinding> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsNamespaceImportSpecifierSlots {
+    pub star_token: SyntaxResult<SyntaxToken>,
+    pub as_token: SyntaxResult<SyntaxToken>,
+    pub local_name: SyntaxResult<JsAnyBinding>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsNewExpression {
@@ -2129,6 +3395,14 @@ impl JsNewExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsNewExpressionSlots {
+        JsNewExpressionSlots {
+            new_token: self.new_token(),
+            callee: self.callee(),
+            type_arguments: self.type_arguments(),
+            arguments: self.arguments(),
+        }
+    }
     pub fn new_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2137,6 +3411,12 @@ impl JsNewExpression {
     }
     pub fn type_arguments(&self) -> Option<TsTypeArguments> { support::node(&self.syntax, 2usize) }
     pub fn arguments(&self) -> Option<JsCallArguments> { support::node(&self.syntax, 3usize) }
+}
+pub struct JsNewExpressionSlots {
+    pub new_token: SyntaxResult<SyntaxToken>,
+    pub callee: SyntaxResult<JsAnyExpression>,
+    pub type_arguments: Option<TsTypeArguments>,
+    pub arguments: Option<JsCallArguments>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsNullLiteralExpression {
@@ -2150,9 +3430,17 @@ impl JsNullLiteralExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsNullLiteralExpressionSlots {
+        JsNullLiteralExpressionSlots {
+            value_token: self.value_token(),
+        }
+    }
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsNullLiteralExpressionSlots {
+    pub value_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsNumberLiteralExpression {
@@ -2166,9 +3454,17 @@ impl JsNumberLiteralExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsNumberLiteralExpressionSlots {
+        JsNumberLiteralExpressionSlots {
+            value_token: self.value_token(),
+        }
+    }
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsNumberLiteralExpressionSlots {
+    pub value_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsObjectAssignmentPattern {
@@ -2182,6 +3478,13 @@ impl JsObjectAssignmentPattern {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsObjectAssignmentPatternSlots {
+        JsObjectAssignmentPatternSlots {
+            l_curly_token: self.l_curly_token(),
+            properties: self.properties(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn l_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2191,6 +3494,11 @@ impl JsObjectAssignmentPattern {
     pub fn r_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsObjectAssignmentPatternSlots {
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub properties: JsObjectAssignmentPatternPropertyList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsObjectAssignmentPatternProperty {
@@ -2204,6 +3512,14 @@ impl JsObjectAssignmentPatternProperty {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsObjectAssignmentPatternPropertySlots {
+        JsObjectAssignmentPatternPropertySlots {
+            member: self.member(),
+            colon_token: self.colon_token(),
+            pattern: self.pattern(),
+            init: self.init(),
+        }
+    }
     pub fn member(&self) -> SyntaxResult<JsAnyObjectMemberName> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -2214,6 +3530,12 @@ impl JsObjectAssignmentPatternProperty {
         support::required_node(&self.syntax, 2usize)
     }
     pub fn init(&self) -> Option<JsInitializerClause> { support::node(&self.syntax, 3usize) }
+}
+pub struct JsObjectAssignmentPatternPropertySlots {
+    pub member: SyntaxResult<JsAnyObjectMemberName>,
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub pattern: SyntaxResult<JsAnyAssignmentPattern>,
+    pub init: Option<JsInitializerClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsObjectAssignmentPatternRest {
@@ -2227,12 +3549,22 @@ impl JsObjectAssignmentPatternRest {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsObjectAssignmentPatternRestSlots {
+        JsObjectAssignmentPatternRestSlots {
+            dotdotdot_token: self.dotdotdot_token(),
+            target: self.target(),
+        }
+    }
     pub fn dotdotdot_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn target(&self) -> SyntaxResult<JsAnyAssignment> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsObjectAssignmentPatternRestSlots {
+    pub dotdotdot_token: SyntaxResult<SyntaxToken>,
+    pub target: SyntaxResult<JsAnyAssignment>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsObjectAssignmentPatternShorthandProperty {
@@ -2246,10 +3578,20 @@ impl JsObjectAssignmentPatternShorthandProperty {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsObjectAssignmentPatternShorthandPropertySlots {
+        JsObjectAssignmentPatternShorthandPropertySlots {
+            identifier: self.identifier(),
+            init: self.init(),
+        }
+    }
     pub fn identifier(&self) -> SyntaxResult<JsAnyAssignment> {
         support::required_node(&self.syntax, 0usize)
     }
     pub fn init(&self) -> Option<JsInitializerClause> { support::node(&self.syntax, 1usize) }
+}
+pub struct JsObjectAssignmentPatternShorthandPropertySlots {
+    pub identifier: SyntaxResult<JsAnyAssignment>,
+    pub init: Option<JsInitializerClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsObjectBindingPattern {
@@ -2263,6 +3605,13 @@ impl JsObjectBindingPattern {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsObjectBindingPatternSlots {
+        JsObjectBindingPatternSlots {
+            l_curly_token: self.l_curly_token(),
+            properties: self.properties(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn l_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2272,6 +3621,11 @@ impl JsObjectBindingPattern {
     pub fn r_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsObjectBindingPatternSlots {
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub properties: JsObjectBindingPatternPropertyList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsObjectBindingPatternProperty {
@@ -2285,6 +3639,14 @@ impl JsObjectBindingPatternProperty {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsObjectBindingPatternPropertySlots {
+        JsObjectBindingPatternPropertySlots {
+            member: self.member(),
+            colon_token: self.colon_token(),
+            pattern: self.pattern(),
+            init: self.init(),
+        }
+    }
     pub fn member(&self) -> SyntaxResult<JsAnyObjectMemberName> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -2295,6 +3657,12 @@ impl JsObjectBindingPatternProperty {
         support::required_node(&self.syntax, 2usize)
     }
     pub fn init(&self) -> Option<JsInitializerClause> { support::node(&self.syntax, 3usize) }
+}
+pub struct JsObjectBindingPatternPropertySlots {
+    pub member: SyntaxResult<JsAnyObjectMemberName>,
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub pattern: SyntaxResult<JsAnyBindingPattern>,
+    pub init: Option<JsInitializerClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsObjectBindingPatternRest {
@@ -2308,12 +3676,22 @@ impl JsObjectBindingPatternRest {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsObjectBindingPatternRestSlots {
+        JsObjectBindingPatternRestSlots {
+            dotdotdot_token: self.dotdotdot_token(),
+            binding: self.binding(),
+        }
+    }
     pub fn dotdotdot_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn binding(&self) -> SyntaxResult<JsAnyBinding> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsObjectBindingPatternRestSlots {
+    pub dotdotdot_token: SyntaxResult<SyntaxToken>,
+    pub binding: SyntaxResult<JsAnyBinding>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsObjectBindingPatternShorthandProperty {
@@ -2327,10 +3705,20 @@ impl JsObjectBindingPatternShorthandProperty {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsObjectBindingPatternShorthandPropertySlots {
+        JsObjectBindingPatternShorthandPropertySlots {
+            identifier: self.identifier(),
+            init: self.init(),
+        }
+    }
     pub fn identifier(&self) -> SyntaxResult<JsAnyBinding> {
         support::required_node(&self.syntax, 0usize)
     }
     pub fn init(&self) -> Option<JsInitializerClause> { support::node(&self.syntax, 1usize) }
+}
+pub struct JsObjectBindingPatternShorthandPropertySlots {
+    pub identifier: SyntaxResult<JsAnyBinding>,
+    pub init: Option<JsInitializerClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsObjectExpression {
@@ -2344,6 +3732,13 @@ impl JsObjectExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsObjectExpressionSlots {
+        JsObjectExpressionSlots {
+            l_curly_token: self.l_curly_token(),
+            members: self.members(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn l_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2351,6 +3746,11 @@ impl JsObjectExpression {
     pub fn r_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsObjectExpressionSlots {
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub members: JsObjectMemberList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsParameters {
@@ -2364,6 +3764,13 @@ impl JsParameters {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsParametersSlots {
+        JsParametersSlots {
+            l_paren_token: self.l_paren_token(),
+            items: self.items(),
+            r_paren_token: self.r_paren_token(),
+        }
+    }
     pub fn l_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2371,6 +3778,11 @@ impl JsParameters {
     pub fn r_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsParametersSlots {
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub items: JsParameterList,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsParenthesizedAssignment {
@@ -2384,6 +3796,13 @@ impl JsParenthesizedAssignment {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsParenthesizedAssignmentSlots {
+        JsParenthesizedAssignmentSlots {
+            l_paren_token: self.l_paren_token(),
+            assignment: self.assignment(),
+            r_paren_token: self.r_paren_token(),
+        }
+    }
     pub fn l_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2393,6 +3812,11 @@ impl JsParenthesizedAssignment {
     pub fn r_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsParenthesizedAssignmentSlots {
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub assignment: SyntaxResult<JsAnyAssignment>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsParenthesizedExpression {
@@ -2406,6 +3830,13 @@ impl JsParenthesizedExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsParenthesizedExpressionSlots {
+        JsParenthesizedExpressionSlots {
+            l_paren_token: self.l_paren_token(),
+            expression: self.expression(),
+            r_paren_token: self.r_paren_token(),
+        }
+    }
     pub fn l_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2415,6 +3846,11 @@ impl JsParenthesizedExpression {
     pub fn r_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsParenthesizedExpressionSlots {
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub expression: SyntaxResult<JsAnyExpression>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsPostUpdateExpression {
@@ -2428,12 +3864,22 @@ impl JsPostUpdateExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsPostUpdateExpressionSlots {
+        JsPostUpdateExpressionSlots {
+            operand: self.operand(),
+            operator: self.operator(),
+        }
+    }
     pub fn operand(&self) -> SyntaxResult<JsAnyAssignment> {
         support::required_node(&self.syntax, 0usize)
     }
     pub fn operator(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
+}
+pub struct JsPostUpdateExpressionSlots {
+    pub operand: SyntaxResult<JsAnyAssignment>,
+    pub operator: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsPreUpdateExpression {
@@ -2447,12 +3893,22 @@ impl JsPreUpdateExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsPreUpdateExpressionSlots {
+        JsPreUpdateExpressionSlots {
+            operator: self.operator(),
+            operand: self.operand(),
+        }
+    }
     pub fn operator(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn operand(&self) -> SyntaxResult<JsAnyAssignment> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsPreUpdateExpressionSlots {
+    pub operator: SyntaxResult<SyntaxToken>,
+    pub operand: SyntaxResult<JsAnyAssignment>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsPrivateClassMemberName {
@@ -2466,12 +3922,22 @@ impl JsPrivateClassMemberName {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsPrivateClassMemberNameSlots {
+        JsPrivateClassMemberNameSlots {
+            hash_token: self.hash_token(),
+            id_token: self.id_token(),
+        }
+    }
     pub fn hash_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn id_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
+}
+pub struct JsPrivateClassMemberNameSlots {
+    pub hash_token: SyntaxResult<SyntaxToken>,
+    pub id_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsPrivateName {
@@ -2485,12 +3951,22 @@ impl JsPrivateName {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsPrivateNameSlots {
+        JsPrivateNameSlots {
+            hash_token: self.hash_token(),
+            value_token: self.value_token(),
+        }
+    }
     pub fn hash_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
+}
+pub struct JsPrivateNameSlots {
+    pub hash_token: SyntaxResult<SyntaxToken>,
+    pub value_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsPropertyClassMember {
@@ -2504,6 +3980,19 @@ impl JsPropertyClassMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsPropertyClassMemberSlots {
+        JsPropertyClassMemberSlots {
+            declare_token: self.declare_token(),
+            access_modifier: self.access_modifier(),
+            static_token: self.static_token(),
+            readonly_token: self.readonly_token(),
+            abstract_token: self.abstract_token(),
+            name: self.name(),
+            property_annotation: self.property_annotation(),
+            value: self.value(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn declare_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn access_modifier(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
     pub fn static_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 2usize) }
@@ -2518,6 +4007,17 @@ impl JsPropertyClassMember {
     pub fn value(&self) -> Option<JsInitializerClause> { support::node(&self.syntax, 7usize) }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 8usize) }
 }
+pub struct JsPropertyClassMemberSlots {
+    pub declare_token: Option<SyntaxToken>,
+    pub access_modifier: Option<SyntaxToken>,
+    pub static_token: Option<SyntaxToken>,
+    pub readonly_token: Option<SyntaxToken>,
+    pub abstract_token: Option<SyntaxToken>,
+    pub name: SyntaxResult<JsAnyClassMemberName>,
+    pub property_annotation: Option<TsAnyPropertyAnnotation>,
+    pub value: Option<JsInitializerClause>,
+    pub semicolon_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsPropertyObjectMember {
     pub(crate) syntax: SyntaxNode,
@@ -2530,6 +4030,13 @@ impl JsPropertyObjectMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsPropertyObjectMemberSlots {
+        JsPropertyObjectMemberSlots {
+            name: self.name(),
+            colon_token: self.colon_token(),
+            value: self.value(),
+        }
+    }
     pub fn name(&self) -> SyntaxResult<JsAnyObjectMemberName> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -2539,6 +4046,11 @@ impl JsPropertyObjectMember {
     pub fn value(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsPropertyObjectMemberSlots {
+    pub name: SyntaxResult<JsAnyObjectMemberName>,
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub value: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsReferenceIdentifier {
@@ -2552,9 +4064,17 @@ impl JsReferenceIdentifier {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsReferenceIdentifierSlots {
+        JsReferenceIdentifierSlots {
+            value_token: self.value_token(),
+        }
+    }
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsReferenceIdentifierSlots {
+    pub value_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsRegexLiteralExpression {
@@ -2568,9 +4088,17 @@ impl JsRegexLiteralExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsRegexLiteralExpressionSlots {
+        JsRegexLiteralExpressionSlots {
+            value_token: self.value_token(),
+        }
+    }
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsRegexLiteralExpressionSlots {
+    pub value_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsRestParameter {
@@ -2584,6 +4112,13 @@ impl JsRestParameter {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsRestParameterSlots {
+        JsRestParameterSlots {
+            dotdotdot_token: self.dotdotdot_token(),
+            binding: self.binding(),
+            type_annotation: self.type_annotation(),
+        }
+    }
     pub fn dotdotdot_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2593,6 +4128,11 @@ impl JsRestParameter {
     pub fn type_annotation(&self) -> Option<TsTypeAnnotation> {
         support::node(&self.syntax, 2usize)
     }
+}
+pub struct JsRestParameterSlots {
+    pub dotdotdot_token: SyntaxResult<SyntaxToken>,
+    pub binding: SyntaxResult<JsAnyBindingPattern>,
+    pub type_annotation: Option<TsTypeAnnotation>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsReturnStatement {
@@ -2606,11 +4146,23 @@ impl JsReturnStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsReturnStatementSlots {
+        JsReturnStatementSlots {
+            return_token: self.return_token(),
+            argument: self.argument(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn return_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn argument(&self) -> Option<JsAnyExpression> { support::node(&self.syntax, 1usize) }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 2usize) }
+}
+pub struct JsReturnStatementSlots {
+    pub return_token: SyntaxResult<SyntaxToken>,
+    pub argument: Option<JsAnyExpression>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsScript {
@@ -2624,12 +4176,26 @@ impl JsScript {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsScriptSlots {
+        JsScriptSlots {
+            interpreter_token: self.interpreter_token(),
+            directives: self.directives(),
+            statements: self.statements(),
+            eof_token: self.eof_token(),
+        }
+    }
     pub fn interpreter_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn directives(&self) -> JsDirectiveList { support::list(&self.syntax, 1usize) }
     pub fn statements(&self) -> JsStatementList { support::list(&self.syntax, 2usize) }
     pub fn eof_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 3usize)
     }
+}
+pub struct JsScriptSlots {
+    pub interpreter_token: Option<SyntaxToken>,
+    pub directives: JsDirectiveList,
+    pub statements: JsStatementList,
+    pub eof_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsSequenceExpression {
@@ -2643,6 +4209,13 @@ impl JsSequenceExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsSequenceExpressionSlots {
+        JsSequenceExpressionSlots {
+            left: self.left(),
+            comma_token: self.comma_token(),
+            right: self.right(),
+        }
+    }
     pub fn left(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -2652,6 +4225,11 @@ impl JsSequenceExpression {
     pub fn right(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsSequenceExpressionSlots {
+    pub left: SyntaxResult<JsAnyExpression>,
+    pub comma_token: SyntaxResult<SyntaxToken>,
+    pub right: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsSetterClassMember {
@@ -2665,6 +4243,19 @@ impl JsSetterClassMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsSetterClassMemberSlots {
+        JsSetterClassMemberSlots {
+            access_modifier: self.access_modifier(),
+            static_token: self.static_token(),
+            abstract_token: self.abstract_token(),
+            set_token: self.set_token(),
+            name: self.name(),
+            l_paren_token: self.l_paren_token(),
+            parameter: self.parameter(),
+            r_paren_token: self.r_paren_token(),
+            body: self.body(),
+        }
+    }
     pub fn access_modifier(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn static_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
     pub fn abstract_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 2usize) }
@@ -2687,6 +4278,17 @@ impl JsSetterClassMember {
         support::required_node(&self.syntax, 8usize)
     }
 }
+pub struct JsSetterClassMemberSlots {
+    pub access_modifier: Option<SyntaxToken>,
+    pub static_token: Option<SyntaxToken>,
+    pub abstract_token: Option<SyntaxToken>,
+    pub set_token: SyntaxResult<SyntaxToken>,
+    pub name: SyntaxResult<JsAnyClassMemberName>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub parameter: SyntaxResult<JsAnyFormalParameter>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsFunctionBody>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsSetterObjectMember {
     pub(crate) syntax: SyntaxNode,
@@ -2699,6 +4301,16 @@ impl JsSetterObjectMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsSetterObjectMemberSlots {
+        JsSetterObjectMemberSlots {
+            set_token: self.set_token(),
+            name: self.name(),
+            l_paren_token: self.l_paren_token(),
+            parameter: self.parameter(),
+            r_paren_token: self.r_paren_token(),
+            body: self.body(),
+        }
+    }
     pub fn set_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2718,6 +4330,14 @@ impl JsSetterObjectMember {
         support::required_node(&self.syntax, 5usize)
     }
 }
+pub struct JsSetterObjectMemberSlots {
+    pub set_token: SyntaxResult<SyntaxToken>,
+    pub name: SyntaxResult<JsAnyObjectMemberName>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub parameter: SyntaxResult<JsAnyFormalParameter>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsFunctionBody>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsShorthandNamedImportSpecifier {
     pub(crate) syntax: SyntaxNode,
@@ -2730,9 +4350,17 @@ impl JsShorthandNamedImportSpecifier {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsShorthandNamedImportSpecifierSlots {
+        JsShorthandNamedImportSpecifierSlots {
+            local_name: self.local_name(),
+        }
+    }
     pub fn local_name(&self) -> SyntaxResult<JsAnyBinding> {
         support::required_node(&self.syntax, 0usize)
     }
+}
+pub struct JsShorthandNamedImportSpecifierSlots {
+    pub local_name: SyntaxResult<JsAnyBinding>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsShorthandPropertyObjectMember {
@@ -2746,9 +4374,15 @@ impl JsShorthandPropertyObjectMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsShorthandPropertyObjectMemberSlots {
+        JsShorthandPropertyObjectMemberSlots { name: self.name() }
+    }
     pub fn name(&self) -> SyntaxResult<JsReferenceIdentifier> {
         support::required_node(&self.syntax, 0usize)
     }
+}
+pub struct JsShorthandPropertyObjectMemberSlots {
+    pub name: SyntaxResult<JsReferenceIdentifier>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsSpread {
@@ -2762,12 +4396,22 @@ impl JsSpread {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsSpreadSlots {
+        JsSpreadSlots {
+            dotdotdot_token: self.dotdotdot_token(),
+            argument: self.argument(),
+        }
+    }
     pub fn dotdotdot_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn argument(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsSpreadSlots {
+    pub dotdotdot_token: SyntaxResult<SyntaxToken>,
+    pub argument: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsStaticInitializationBlockClassMember {
@@ -2781,6 +4425,14 @@ impl JsStaticInitializationBlockClassMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsStaticInitializationBlockClassMemberSlots {
+        JsStaticInitializationBlockClassMemberSlots {
+            static_token: self.static_token(),
+            l_curly_token: self.l_curly_token(),
+            statements: self.statements(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn static_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2791,6 +4443,12 @@ impl JsStaticInitializationBlockClassMember {
     pub fn r_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 3usize)
     }
+}
+pub struct JsStaticInitializationBlockClassMemberSlots {
+    pub static_token: SyntaxResult<SyntaxToken>,
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub statements: JsStatementList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsStaticMemberAssignment {
@@ -2804,6 +4462,13 @@ impl JsStaticMemberAssignment {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsStaticMemberAssignmentSlots {
+        JsStaticMemberAssignmentSlots {
+            object: self.object(),
+            dot_token: self.dot_token(),
+            member: self.member(),
+        }
+    }
     pub fn object(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -2811,6 +4476,11 @@ impl JsStaticMemberAssignment {
         support::required_token(&self.syntax, 1usize)
     }
     pub fn member(&self) -> SyntaxResult<JsAnyName> { support::required_node(&self.syntax, 2usize) }
+}
+pub struct JsStaticMemberAssignmentSlots {
+    pub object: SyntaxResult<JsAnyExpression>,
+    pub dot_token: SyntaxResult<SyntaxToken>,
+    pub member: SyntaxResult<JsAnyName>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsStaticMemberExpression {
@@ -2824,6 +4494,13 @@ impl JsStaticMemberExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsStaticMemberExpressionSlots {
+        JsStaticMemberExpressionSlots {
+            object: self.object(),
+            operator: self.operator(),
+            member: self.member(),
+        }
+    }
     pub fn object(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -2831,6 +4508,11 @@ impl JsStaticMemberExpression {
         support::required_token(&self.syntax, 1usize)
     }
     pub fn member(&self) -> SyntaxResult<JsAnyName> { support::required_node(&self.syntax, 2usize) }
+}
+pub struct JsStaticMemberExpressionSlots {
+    pub object: SyntaxResult<JsAnyExpression>,
+    pub operator: SyntaxResult<SyntaxToken>,
+    pub member: SyntaxResult<JsAnyName>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsStringLiteralExpression {
@@ -2844,9 +4526,17 @@ impl JsStringLiteralExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsStringLiteralExpressionSlots {
+        JsStringLiteralExpressionSlots {
+            value_token: self.value_token(),
+        }
+    }
     pub fn value_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsStringLiteralExpressionSlots {
+    pub value_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsSuperExpression {
@@ -2860,9 +4550,17 @@ impl JsSuperExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsSuperExpressionSlots {
+        JsSuperExpressionSlots {
+            super_token: self.super_token(),
+        }
+    }
     pub fn super_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsSuperExpressionSlots {
+    pub super_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsSwitchStatement {
@@ -2876,6 +4574,17 @@ impl JsSwitchStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsSwitchStatementSlots {
+        JsSwitchStatementSlots {
+            switch_token: self.switch_token(),
+            l_paren_token: self.l_paren_token(),
+            discriminant: self.discriminant(),
+            r_paren_token: self.r_paren_token(),
+            l_curly_token: self.l_curly_token(),
+            cases: self.cases(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn switch_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2896,6 +4605,15 @@ impl JsSwitchStatement {
         support::required_token(&self.syntax, 6usize)
     }
 }
+pub struct JsSwitchStatementSlots {
+    pub switch_token: SyntaxResult<SyntaxToken>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub discriminant: SyntaxResult<JsAnyExpression>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub cases: JsSwitchCaseList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsTemplate {
     pub(crate) syntax: SyntaxNode,
@@ -2908,6 +4626,15 @@ impl JsTemplate {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsTemplateSlots {
+        JsTemplateSlots {
+            tag: self.tag(),
+            type_arguments: self.type_arguments(),
+            l_tick_token: self.l_tick_token(),
+            elements: self.elements(),
+            r_tick_token: self.r_tick_token(),
+        }
+    }
     pub fn tag(&self) -> Option<JsAnyExpression> { support::node(&self.syntax, 0usize) }
     pub fn type_arguments(&self) -> Option<TsTypeArguments> { support::node(&self.syntax, 1usize) }
     pub fn l_tick_token(&self) -> SyntaxResult<SyntaxToken> {
@@ -2917,6 +4644,13 @@ impl JsTemplate {
     pub fn r_tick_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 4usize)
     }
+}
+pub struct JsTemplateSlots {
+    pub tag: Option<JsAnyExpression>,
+    pub type_arguments: Option<TsTypeArguments>,
+    pub l_tick_token: SyntaxResult<SyntaxToken>,
+    pub elements: JsTemplateElementList,
+    pub r_tick_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsTemplateChunkElement {
@@ -2930,9 +4664,17 @@ impl JsTemplateChunkElement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsTemplateChunkElementSlots {
+        JsTemplateChunkElementSlots {
+            template_chunk_token: self.template_chunk_token(),
+        }
+    }
     pub fn template_chunk_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsTemplateChunkElementSlots {
+    pub template_chunk_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsTemplateElement {
@@ -2946,6 +4688,13 @@ impl JsTemplateElement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsTemplateElementSlots {
+        JsTemplateElementSlots {
+            dollar_curly_token: self.dollar_curly_token(),
+            expression: self.expression(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn dollar_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2955,6 +4704,11 @@ impl JsTemplateElement {
     pub fn r_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct JsTemplateElementSlots {
+    pub dollar_curly_token: SyntaxResult<SyntaxToken>,
+    pub expression: SyntaxResult<JsAnyExpression>,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsThisExpression {
@@ -2968,9 +4722,17 @@ impl JsThisExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsThisExpressionSlots {
+        JsThisExpressionSlots {
+            this_token: self.this_token(),
+        }
+    }
     pub fn this_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct JsThisExpressionSlots {
+    pub this_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsThrowStatement {
@@ -2984,6 +4746,13 @@ impl JsThrowStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsThrowStatementSlots {
+        JsThrowStatementSlots {
+            throw_token: self.throw_token(),
+            argument: self.argument(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn throw_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -2991,6 +4760,11 @@ impl JsThrowStatement {
         support::required_node(&self.syntax, 1usize)
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 2usize) }
+}
+pub struct JsThrowStatementSlots {
+    pub throw_token: SyntaxResult<SyntaxToken>,
+    pub argument: SyntaxResult<JsAnyExpression>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsTryFinallyStatement {
@@ -3004,6 +4778,14 @@ impl JsTryFinallyStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsTryFinallyStatementSlots {
+        JsTryFinallyStatementSlots {
+            try_token: self.try_token(),
+            body: self.body(),
+            catch_clause: self.catch_clause(),
+            finally_clause: self.finally_clause(),
+        }
+    }
     pub fn try_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -3014,6 +4796,12 @@ impl JsTryFinallyStatement {
     pub fn finally_clause(&self) -> SyntaxResult<JsFinallyClause> {
         support::required_node(&self.syntax, 3usize)
     }
+}
+pub struct JsTryFinallyStatementSlots {
+    pub try_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsBlockStatement>,
+    pub catch_clause: Option<JsCatchClause>,
+    pub finally_clause: SyntaxResult<JsFinallyClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsTryStatement {
@@ -3027,6 +4815,13 @@ impl JsTryStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsTryStatementSlots {
+        JsTryStatementSlots {
+            try_token: self.try_token(),
+            body: self.body(),
+            catch_clause: self.catch_clause(),
+        }
+    }
     pub fn try_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -3036,6 +4831,11 @@ impl JsTryStatement {
     pub fn catch_clause(&self) -> SyntaxResult<JsCatchClause> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct JsTryStatementSlots {
+    pub try_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsBlockStatement>,
+    pub catch_clause: SyntaxResult<JsCatchClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsUnaryExpression {
@@ -3049,12 +4849,22 @@ impl JsUnaryExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsUnaryExpressionSlots {
+        JsUnaryExpressionSlots {
+            operator: self.operator(),
+            argument: self.argument(),
+        }
+    }
     pub fn operator(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn argument(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsUnaryExpressionSlots {
+    pub operator: SyntaxResult<SyntaxToken>,
+    pub argument: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsVariableDeclaration {
@@ -3068,10 +4878,20 @@ impl JsVariableDeclaration {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsVariableDeclarationSlots {
+        JsVariableDeclarationSlots {
+            kind: self.kind(),
+            declarators: self.declarators(),
+        }
+    }
     pub fn kind(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn declarators(&self) -> JsVariableDeclaratorList { support::list(&self.syntax, 1usize) }
+}
+pub struct JsVariableDeclarationSlots {
+    pub kind: SyntaxResult<SyntaxToken>,
+    pub declarators: JsVariableDeclaratorList,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsVariableDeclarator {
@@ -3085,6 +4905,13 @@ impl JsVariableDeclarator {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsVariableDeclaratorSlots {
+        JsVariableDeclaratorSlots {
+            id: self.id(),
+            variable_annotation: self.variable_annotation(),
+            initializer: self.initializer(),
+        }
+    }
     pub fn id(&self) -> SyntaxResult<JsAnyBindingPattern> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -3092,6 +4919,11 @@ impl JsVariableDeclarator {
         support::node(&self.syntax, 1usize)
     }
     pub fn initializer(&self) -> Option<JsInitializerClause> { support::node(&self.syntax, 2usize) }
+}
+pub struct JsVariableDeclaratorSlots {
+    pub id: SyntaxResult<JsAnyBindingPattern>,
+    pub variable_annotation: Option<TsAnyVariableAnnotation>,
+    pub initializer: Option<JsInitializerClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsVariableStatement {
@@ -3105,11 +4937,23 @@ impl JsVariableStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsVariableStatementSlots {
+        JsVariableStatementSlots {
+            declare_token: self.declare_token(),
+            declaration: self.declaration(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn declare_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn declaration(&self) -> SyntaxResult<JsVariableDeclaration> {
         support::required_node(&self.syntax, 1usize)
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 2usize) }
+}
+pub struct JsVariableStatementSlots {
+    pub declare_token: Option<SyntaxToken>,
+    pub declaration: SyntaxResult<JsVariableDeclaration>,
+    pub semicolon_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsWhileStatement {
@@ -3123,6 +4967,15 @@ impl JsWhileStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsWhileStatementSlots {
+        JsWhileStatementSlots {
+            while_token: self.while_token(),
+            l_paren_token: self.l_paren_token(),
+            test: self.test(),
+            r_paren_token: self.r_paren_token(),
+            body: self.body(),
+        }
+    }
     pub fn while_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -3139,6 +4992,13 @@ impl JsWhileStatement {
         support::required_node(&self.syntax, 4usize)
     }
 }
+pub struct JsWhileStatementSlots {
+    pub while_token: SyntaxResult<SyntaxToken>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub test: SyntaxResult<JsAnyExpression>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsAnyStatement>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsWithStatement {
     pub(crate) syntax: SyntaxNode,
@@ -3151,6 +5011,15 @@ impl JsWithStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsWithStatementSlots {
+        JsWithStatementSlots {
+            with_token: self.with_token(),
+            l_paren_token: self.l_paren_token(),
+            object: self.object(),
+            r_paren_token: self.r_paren_token(),
+            body: self.body(),
+        }
+    }
     pub fn with_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -3167,6 +5036,13 @@ impl JsWithStatement {
         support::required_node(&self.syntax, 4usize)
     }
 }
+pub struct JsWithStatementSlots {
+    pub with_token: SyntaxResult<SyntaxToken>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub object: SyntaxResult<JsAnyExpression>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub body: SyntaxResult<JsAnyStatement>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsYieldArgument {
     pub(crate) syntax: SyntaxNode,
@@ -3179,10 +5055,20 @@ impl JsYieldArgument {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsYieldArgumentSlots {
+        JsYieldArgumentSlots {
+            star_token: self.star_token(),
+            expression: self.expression(),
+        }
+    }
     pub fn star_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn expression(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct JsYieldArgumentSlots {
+    pub star_token: Option<SyntaxToken>,
+    pub expression: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct JsYieldExpression {
@@ -3196,10 +5082,20 @@ impl JsYieldExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> JsYieldExpressionSlots {
+        JsYieldExpressionSlots {
+            yield_token: self.yield_token(),
+            argument: self.argument(),
+        }
+    }
     pub fn yield_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn argument(&self) -> Option<JsYieldArgument> { support::node(&self.syntax, 1usize) }
+}
+pub struct JsYieldExpressionSlots {
+    pub yield_token: SyntaxResult<SyntaxToken>,
+    pub argument: Option<JsYieldArgument>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct NewTarget {
@@ -3213,6 +5109,13 @@ impl NewTarget {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> NewTargetSlots {
+        NewTargetSlots {
+            new_token: self.new_token(),
+            dot_token: self.dot_token(),
+            target_token: self.target_token(),
+        }
+    }
     pub fn new_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -3222,6 +5125,11 @@ impl NewTarget {
     pub fn target_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct NewTargetSlots {
+    pub new_token: SyntaxResult<SyntaxToken>,
+    pub dot_token: SyntaxResult<SyntaxToken>,
+    pub target_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsAnyType {
@@ -3235,9 +5143,17 @@ impl TsAnyType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsAnyTypeSlots {
+        TsAnyTypeSlots {
+            any_token: self.any_token(),
+        }
+    }
     pub fn any_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsAnyTypeSlots {
+    pub any_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsArrayType {
@@ -3251,6 +5167,13 @@ impl TsArrayType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsArrayTypeSlots {
+        TsArrayTypeSlots {
+            element_type: self.element_type(),
+            l_brack_token: self.l_brack_token(),
+            r_brack_token: self.r_brack_token(),
+        }
+    }
     pub fn element_type(&self) -> SyntaxResult<TsType> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -3260,6 +5183,11 @@ impl TsArrayType {
     pub fn r_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct TsArrayTypeSlots {
+    pub element_type: SyntaxResult<TsType>,
+    pub l_brack_token: SyntaxResult<SyntaxToken>,
+    pub r_brack_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsAsExpression {
@@ -3273,6 +5201,13 @@ impl TsAsExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsAsExpressionSlots {
+        TsAsExpressionSlots {
+            expression: self.expression(),
+            as_token: self.as_token(),
+            ty: self.ty(),
+        }
+    }
     pub fn expression(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -3280,6 +5215,11 @@ impl TsAsExpression {
         support::required_token(&self.syntax, 1usize)
     }
     pub fn ty(&self) -> SyntaxResult<TsType> { support::required_node(&self.syntax, 2usize) }
+}
+pub struct TsAsExpressionSlots {
+    pub expression: SyntaxResult<JsAnyExpression>,
+    pub as_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsBigIntLiteralType {
@@ -3293,10 +5233,20 @@ impl TsBigIntLiteralType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsBigIntLiteralTypeSlots {
+        TsBigIntLiteralTypeSlots {
+            minus_token: self.minus_token(),
+            literal_token: self.literal_token(),
+        }
+    }
     pub fn minus_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn literal_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
+}
+pub struct TsBigIntLiteralTypeSlots {
+    pub minus_token: Option<SyntaxToken>,
+    pub literal_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsBigintType {
@@ -3310,9 +5260,17 @@ impl TsBigintType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsBigintTypeSlots {
+        TsBigintTypeSlots {
+            bigint_token: self.bigint_token(),
+        }
+    }
     pub fn bigint_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsBigintTypeSlots {
+    pub bigint_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsBooleanLiteralType {
@@ -3326,9 +5284,17 @@ impl TsBooleanLiteralType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsBooleanLiteralTypeSlots {
+        TsBooleanLiteralTypeSlots {
+            literal: self.literal(),
+        }
+    }
     pub fn literal(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsBooleanLiteralTypeSlots {
+    pub literal: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsBooleanType {
@@ -3342,9 +5308,17 @@ impl TsBooleanType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsBooleanTypeSlots {
+        TsBooleanTypeSlots {
+            boolean_token: self.boolean_token(),
+        }
+    }
     pub fn boolean_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsBooleanTypeSlots {
+    pub boolean_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsCallSignatureTypeMember {
@@ -3358,6 +5332,14 @@ impl TsCallSignatureTypeMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsCallSignatureTypeMemberSlots {
+        TsCallSignatureTypeMemberSlots {
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            return_type_annotation: self.return_type_annotation(),
+            separator_token: self.separator_token(),
+        }
+    }
     pub fn type_parameters(&self) -> Option<TsTypeParameters> {
         support::node(&self.syntax, 0usize)
     }
@@ -3368,6 +5350,12 @@ impl TsCallSignatureTypeMember {
         support::node(&self.syntax, 2usize)
     }
     pub fn separator_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 3usize) }
+}
+pub struct TsCallSignatureTypeMemberSlots {
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub return_type_annotation: Option<TsReturnTypeAnnotation>,
+    pub separator_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsConditionalType {
@@ -3381,6 +5369,17 @@ impl TsConditionalType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsConditionalTypeSlots {
+        TsConditionalTypeSlots {
+            check_type: self.check_type(),
+            extends_token: self.extends_token(),
+            extends_type: self.extends_type(),
+            question_mark_token: self.question_mark_token(),
+            true_type: self.true_type(),
+            colon_token: self.colon_token(),
+            false_type: self.false_type(),
+        }
+    }
     pub fn check_type(&self) -> SyntaxResult<TsType> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -3401,6 +5400,15 @@ impl TsConditionalType {
         support::required_node(&self.syntax, 6usize)
     }
 }
+pub struct TsConditionalTypeSlots {
+    pub check_type: SyntaxResult<TsType>,
+    pub extends_token: SyntaxResult<SyntaxToken>,
+    pub extends_type: SyntaxResult<TsType>,
+    pub question_mark_token: SyntaxResult<SyntaxToken>,
+    pub true_type: SyntaxResult<TsType>,
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub false_type: SyntaxResult<TsType>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsConstructSignatureTypeMember {
     pub(crate) syntax: SyntaxNode,
@@ -3413,6 +5421,15 @@ impl TsConstructSignatureTypeMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsConstructSignatureTypeMemberSlots {
+        TsConstructSignatureTypeMemberSlots {
+            new_token: self.new_token(),
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            type_annotation: self.type_annotation(),
+            separator_token: self.separator_token(),
+        }
+    }
     pub fn new_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -3427,6 +5444,13 @@ impl TsConstructSignatureTypeMember {
     }
     pub fn separator_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 4usize) }
 }
+pub struct TsConstructSignatureTypeMemberSlots {
+    pub new_token: SyntaxResult<SyntaxToken>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub type_annotation: Option<TsTypeAnnotation>,
+    pub separator_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsConstructorType {
     pub(crate) syntax: SyntaxNode,
@@ -3439,6 +5463,16 @@ impl TsConstructorType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsConstructorTypeSlots {
+        TsConstructorTypeSlots {
+            abstract_token: self.abstract_token(),
+            new_token: self.new_token(),
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            fat_arrow_token: self.fat_arrow_token(),
+            return_type: self.return_type(),
+        }
+    }
     pub fn abstract_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn new_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
@@ -3456,6 +5490,14 @@ impl TsConstructorType {
         support::required_node(&self.syntax, 5usize)
     }
 }
+pub struct TsConstructorTypeSlots {
+    pub abstract_token: Option<SyntaxToken>,
+    pub new_token: SyntaxResult<SyntaxToken>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub fat_arrow_token: SyntaxResult<SyntaxToken>,
+    pub return_type: SyntaxResult<TsType>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsDeclareFunctionStatement {
     pub(crate) syntax: SyntaxNode,
@@ -3468,6 +5510,18 @@ impl TsDeclareFunctionStatement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsDeclareFunctionStatementSlots {
+        TsDeclareFunctionStatementSlots {
+            declare_token: self.declare_token(),
+            async_token: self.async_token(),
+            function_token: self.function_token(),
+            id: self.id(),
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            return_type_annotation: self.return_type_annotation(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn declare_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn async_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
     pub fn function_token(&self) -> SyntaxResult<SyntaxToken> {
@@ -3485,6 +5539,16 @@ impl TsDeclareFunctionStatement {
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 7usize) }
 }
+pub struct TsDeclareFunctionStatementSlots {
+    pub declare_token: Option<SyntaxToken>,
+    pub async_token: Option<SyntaxToken>,
+    pub function_token: SyntaxResult<SyntaxToken>,
+    pub id: SyntaxResult<JsAnyBinding>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub return_type_annotation: Option<TsReturnTypeAnnotation>,
+    pub semicolon_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsDefaultTypeClause {
     pub(crate) syntax: SyntaxNode,
@@ -3497,10 +5561,20 @@ impl TsDefaultTypeClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsDefaultTypeClauseSlots {
+        TsDefaultTypeClauseSlots {
+            eq_token: self.eq_token(),
+            ty: self.ty(),
+        }
+    }
     pub fn eq_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn ty(&self) -> SyntaxResult<TsType> { support::required_node(&self.syntax, 1usize) }
+}
+pub struct TsDefaultTypeClauseSlots {
+    pub eq_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsDefinitePropertyAnnotation {
@@ -3514,12 +5588,22 @@ impl TsDefinitePropertyAnnotation {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsDefinitePropertyAnnotationSlots {
+        TsDefinitePropertyAnnotationSlots {
+            excl_token: self.excl_token(),
+            type_annotation: self.type_annotation(),
+        }
+    }
     pub fn excl_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn type_annotation(&self) -> SyntaxResult<TsTypeAnnotation> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct TsDefinitePropertyAnnotationSlots {
+    pub excl_token: SyntaxResult<SyntaxToken>,
+    pub type_annotation: SyntaxResult<TsTypeAnnotation>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsDefiniteVariableAnnotation {
@@ -3533,12 +5617,22 @@ impl TsDefiniteVariableAnnotation {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsDefiniteVariableAnnotationSlots {
+        TsDefiniteVariableAnnotationSlots {
+            excl_token: self.excl_token(),
+            type_annotation: self.type_annotation(),
+        }
+    }
     pub fn excl_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn type_annotation(&self) -> SyntaxResult<TsTypeAnnotation> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct TsDefiniteVariableAnnotationSlots {
+    pub excl_token: SyntaxResult<SyntaxToken>,
+    pub type_annotation: SyntaxResult<TsTypeAnnotation>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsEnumDeclaration {
@@ -3552,6 +5646,17 @@ impl TsEnumDeclaration {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsEnumDeclarationSlots {
+        TsEnumDeclarationSlots {
+            declare_token: self.declare_token(),
+            const_token: self.const_token(),
+            enum_token: self.enum_token(),
+            id: self.id(),
+            l_curly_token: self.l_curly_token(),
+            members: self.members(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn declare_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn const_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 1usize) }
     pub fn enum_token(&self) -> SyntaxResult<SyntaxToken> {
@@ -3566,6 +5671,15 @@ impl TsEnumDeclaration {
         support::required_token(&self.syntax, 6usize)
     }
 }
+pub struct TsEnumDeclarationSlots {
+    pub declare_token: Option<SyntaxToken>,
+    pub const_token: Option<SyntaxToken>,
+    pub enum_token: SyntaxResult<SyntaxToken>,
+    pub id: SyntaxResult<JsAnyBinding>,
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub members: TsEnumMemberList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsEnumMember {
     pub(crate) syntax: SyntaxNode,
@@ -3578,10 +5692,20 @@ impl TsEnumMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsEnumMemberSlots {
+        TsEnumMemberSlots {
+            name: self.name(),
+            initializer: self.initializer(),
+        }
+    }
     pub fn name(&self) -> SyntaxResult<JsAnyObjectMemberName> {
         support::required_node(&self.syntax, 0usize)
     }
     pub fn initializer(&self) -> Option<JsInitializerClause> { support::node(&self.syntax, 1usize) }
+}
+pub struct TsEnumMemberSlots {
+    pub name: SyntaxResult<JsAnyObjectMemberName>,
+    pub initializer: Option<JsInitializerClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsExtendsClause {
@@ -3595,10 +5719,20 @@ impl TsExtendsClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsExtendsClauseSlots {
+        TsExtendsClauseSlots {
+            extends_token: self.extends_token(),
+            types: self.types(),
+        }
+    }
     pub fn extends_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn types(&self) -> TsTypeList { support::list(&self.syntax, 1usize) }
+}
+pub struct TsExtendsClauseSlots {
+    pub extends_token: SyntaxResult<SyntaxToken>,
+    pub types: TsTypeList,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsExternalModuleRef {
@@ -3612,6 +5746,14 @@ impl TsExternalModuleRef {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsExternalModuleRefSlots {
+        TsExternalModuleRefSlots {
+            require_token: self.require_token(),
+            l_paren_token: self.l_paren_token(),
+            module_token: self.module_token(),
+            r_paren_token: self.r_paren_token(),
+        }
+    }
     pub fn require_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -3625,6 +5767,12 @@ impl TsExternalModuleRef {
         support::required_token(&self.syntax, 3usize)
     }
 }
+pub struct TsExternalModuleRefSlots {
+    pub require_token: SyntaxResult<SyntaxToken>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub module_token: SyntaxResult<SyntaxToken>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsFunctionType {
     pub(crate) syntax: SyntaxNode,
@@ -3637,6 +5785,14 @@ impl TsFunctionType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsFunctionTypeSlots {
+        TsFunctionTypeSlots {
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            fat_arrow_token: self.fat_arrow_token(),
+            return_type: self.return_type(),
+        }
+    }
     pub fn type_parameters(&self) -> Option<TsTypeParameters> {
         support::node(&self.syntax, 0usize)
     }
@@ -3650,6 +5806,12 @@ impl TsFunctionType {
         support::required_node(&self.syntax, 3usize)
     }
 }
+pub struct TsFunctionTypeSlots {
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub fat_arrow_token: SyntaxResult<SyntaxToken>,
+    pub return_type: SyntaxResult<TsAnyReturnType>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsGetterSignatureTypeMember {
     pub(crate) syntax: SyntaxNode,
@@ -3662,6 +5824,16 @@ impl TsGetterSignatureTypeMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsGetterSignatureTypeMemberSlots {
+        TsGetterSignatureTypeMemberSlots {
+            get_token: self.get_token(),
+            name: self.name(),
+            l_paren_token: self.l_paren_token(),
+            r_paren_token: self.r_paren_token(),
+            type_annotation: self.type_annotation(),
+            separator_token: self.separator_token(),
+        }
+    }
     pub fn get_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -3679,6 +5851,14 @@ impl TsGetterSignatureTypeMember {
     }
     pub fn separator_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 5usize) }
 }
+pub struct TsGetterSignatureTypeMemberSlots {
+    pub get_token: SyntaxResult<SyntaxToken>,
+    pub name: SyntaxResult<JsAnyObjectMemberName>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub type_annotation: Option<TsTypeAnnotation>,
+    pub separator_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsIdentifierBinding {
     pub(crate) syntax: SyntaxNode,
@@ -3691,9 +5871,17 @@ impl TsIdentifierBinding {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsIdentifierBindingSlots {
+        TsIdentifierBindingSlots {
+            name_token: self.name_token(),
+        }
+    }
     pub fn name_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsIdentifierBindingSlots {
+    pub name_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsImplementsClause {
@@ -3707,10 +5895,20 @@ impl TsImplementsClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsImplementsClauseSlots {
+        TsImplementsClauseSlots {
+            implements_token: self.implements_token(),
+            types: self.types(),
+        }
+    }
     pub fn implements_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn types(&self) -> TsTypeList { support::list(&self.syntax, 1usize) }
+}
+pub struct TsImplementsClauseSlots {
+    pub implements_token: SyntaxResult<SyntaxToken>,
+    pub types: TsTypeList,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsImportEqualsDecl {
@@ -3724,6 +5922,16 @@ impl TsImportEqualsDecl {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsImportEqualsDeclSlots {
+        TsImportEqualsDeclSlots {
+            import_token: self.import_token(),
+            export_token: self.export_token(),
+            ident_token: self.ident_token(),
+            eq_token: self.eq_token(),
+            module: self.module(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn import_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -3741,6 +5949,14 @@ impl TsImportEqualsDecl {
     }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 5usize) }
 }
+pub struct TsImportEqualsDeclSlots {
+    pub import_token: SyntaxResult<SyntaxToken>,
+    pub export_token: SyntaxResult<SyntaxToken>,
+    pub ident_token: SyntaxResult<SyntaxToken>,
+    pub eq_token: SyntaxResult<SyntaxToken>,
+    pub module: SyntaxResult<TsModuleRef>,
+    pub semicolon_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsImportType {
     pub(crate) syntax: SyntaxNode,
@@ -3753,6 +5969,16 @@ impl TsImportType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsImportTypeSlots {
+        TsImportTypeSlots {
+            typeof_token: self.typeof_token(),
+            import_token: self.import_token(),
+            l_paren_token: self.l_paren_token(),
+            argument_token: self.argument_token(),
+            r_paren_token: self.r_paren_token(),
+            qualifier_clause: self.qualifier_clause(),
+        }
+    }
     pub fn typeof_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn import_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
@@ -3770,6 +5996,14 @@ impl TsImportType {
         support::node(&self.syntax, 5usize)
     }
 }
+pub struct TsImportTypeSlots {
+    pub typeof_token: Option<SyntaxToken>,
+    pub import_token: SyntaxResult<SyntaxToken>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub argument_token: SyntaxResult<SyntaxToken>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub qualifier_clause: Option<TsImportTypeQualifier>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsImportTypeQualifier {
     pub(crate) syntax: SyntaxNode,
@@ -3782,10 +6016,20 @@ impl TsImportTypeQualifier {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsImportTypeQualifierSlots {
+        TsImportTypeQualifierSlots {
+            dot_token: self.dot_token(),
+            right: self.right(),
+        }
+    }
     pub fn dot_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn right(&self) -> SyntaxResult<TsAnyName> { support::required_node(&self.syntax, 1usize) }
+}
+pub struct TsImportTypeQualifierSlots {
+    pub dot_token: SyntaxResult<SyntaxToken>,
+    pub right: SyntaxResult<TsAnyName>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsIndexSignatureParameter {
@@ -3799,12 +6043,22 @@ impl TsIndexSignatureParameter {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsIndexSignatureParameterSlots {
+        TsIndexSignatureParameterSlots {
+            binding: self.binding(),
+            type_annotation: self.type_annotation(),
+        }
+    }
     pub fn binding(&self) -> SyntaxResult<JsIdentifierBinding> {
         support::required_node(&self.syntax, 0usize)
     }
     pub fn type_annotation(&self) -> SyntaxResult<TsTypeAnnotation> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct TsIndexSignatureParameterSlots {
+    pub binding: SyntaxResult<JsIdentifierBinding>,
+    pub type_annotation: SyntaxResult<TsTypeAnnotation>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsIndexSignatureTypeMember {
@@ -3818,6 +6072,16 @@ impl TsIndexSignatureTypeMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsIndexSignatureTypeMemberSlots {
+        TsIndexSignatureTypeMemberSlots {
+            readonly_token: self.readonly_token(),
+            l_brack_token: self.l_brack_token(),
+            parameter: self.parameter(),
+            r_brack_token: self.r_brack_token(),
+            type_annotation: self.type_annotation(),
+            separator_token: self.separator_token(),
+        }
+    }
     pub fn readonly_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn l_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
@@ -3833,6 +6097,14 @@ impl TsIndexSignatureTypeMember {
     }
     pub fn separator_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 5usize) }
 }
+pub struct TsIndexSignatureTypeMemberSlots {
+    pub readonly_token: Option<SyntaxToken>,
+    pub l_brack_token: SyntaxResult<SyntaxToken>,
+    pub parameter: SyntaxResult<TsIndexSignatureParameter>,
+    pub r_brack_token: SyntaxResult<SyntaxToken>,
+    pub type_annotation: SyntaxResult<TsTypeAnnotation>,
+    pub separator_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsIndexedAccessType {
     pub(crate) syntax: SyntaxNode,
@@ -3845,6 +6117,14 @@ impl TsIndexedAccessType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsIndexedAccessTypeSlots {
+        TsIndexedAccessTypeSlots {
+            object_type: self.object_type(),
+            l_brack_token: self.l_brack_token(),
+            index_type: self.index_type(),
+            r_brack_token: self.r_brack_token(),
+        }
+    }
     pub fn object_type(&self) -> SyntaxResult<TsType> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -3858,6 +6138,12 @@ impl TsIndexedAccessType {
         support::required_token(&self.syntax, 3usize)
     }
 }
+pub struct TsIndexedAccessTypeSlots {
+    pub object_type: SyntaxResult<TsType>,
+    pub l_brack_token: SyntaxResult<SyntaxToken>,
+    pub index_type: SyntaxResult<TsType>,
+    pub r_brack_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsInferType {
     pub(crate) syntax: SyntaxNode,
@@ -3870,12 +6156,22 @@ impl TsInferType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsInferTypeSlots {
+        TsInferTypeSlots {
+            infer_token: self.infer_token(),
+            type_parameter: self.type_parameter(),
+        }
+    }
     pub fn infer_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn type_parameter(&self) -> SyntaxResult<TsTypeParameterName> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct TsInferTypeSlots {
+    pub infer_token: SyntaxResult<SyntaxToken>,
+    pub type_parameter: SyntaxResult<TsTypeParameterName>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsInterfaceDeclaration {
@@ -3889,6 +6185,18 @@ impl TsInterfaceDeclaration {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsInterfaceDeclarationSlots {
+        TsInterfaceDeclarationSlots {
+            declare_token: self.declare_token(),
+            interface_token: self.interface_token(),
+            id: self.id(),
+            type_parameters: self.type_parameters(),
+            extends_clause: self.extends_clause(),
+            l_curly_token: self.l_curly_token(),
+            members: self.members(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn declare_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn interface_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
@@ -3908,6 +6216,16 @@ impl TsInterfaceDeclaration {
         support::required_token(&self.syntax, 7usize)
     }
 }
+pub struct TsInterfaceDeclarationSlots {
+    pub declare_token: Option<SyntaxToken>,
+    pub interface_token: SyntaxResult<SyntaxToken>,
+    pub id: SyntaxResult<TsIdentifierBinding>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub extends_clause: Option<TsExtendsClause>,
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub members: TsTypeMemberList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsIntersectionType {
     pub(crate) syntax: SyntaxNode,
@@ -3920,10 +6238,20 @@ impl TsIntersectionType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsIntersectionTypeSlots {
+        TsIntersectionTypeSlots {
+            leading_separator_token_token: self.leading_separator_token_token(),
+            types: self.types(),
+        }
+    }
     pub fn leading_separator_token_token(&self) -> Option<SyntaxToken> {
         support::token(&self.syntax, 0usize)
     }
     pub fn types(&self) -> TsIntersectionTypeElementList { support::list(&self.syntax, 1usize) }
+}
+pub struct TsIntersectionTypeSlots {
+    pub leading_separator_token_token: Option<SyntaxToken>,
+    pub types: TsIntersectionTypeElementList,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsMappedType {
@@ -3937,6 +6265,22 @@ impl TsMappedType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsMappedTypeSlots {
+        TsMappedTypeSlots {
+            l_curly_token: self.l_curly_token(),
+            readonly_modifier: self.readonly_modifier(),
+            l_brack_token: self.l_brack_token(),
+            property_name: self.property_name(),
+            in_token: self.in_token(),
+            keys_type: self.keys_type(),
+            as_clause: self.as_clause(),
+            r_brack_token: self.r_brack_token(),
+            optional_modifier: self.optional_modifier(),
+            mapped_type: self.mapped_type(),
+            semicolon_token: self.semicolon_token(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn l_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -3966,6 +6310,20 @@ impl TsMappedType {
         support::required_token(&self.syntax, 11usize)
     }
 }
+pub struct TsMappedTypeSlots {
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub readonly_modifier: Option<TsMappedTypeReadonlyModifierClause>,
+    pub l_brack_token: SyntaxResult<SyntaxToken>,
+    pub property_name: SyntaxResult<TsTypeParameterName>,
+    pub in_token: SyntaxResult<SyntaxToken>,
+    pub keys_type: SyntaxResult<TsType>,
+    pub as_clause: Option<TsMappedTypeAsClause>,
+    pub r_brack_token: SyntaxResult<SyntaxToken>,
+    pub optional_modifier: Option<TsMappedTypeOptionalModifierClause>,
+    pub mapped_type: Option<TsTypeAnnotation>,
+    pub semicolon_token: Option<SyntaxToken>,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsMappedTypeAsClause {
     pub(crate) syntax: SyntaxNode,
@@ -3978,10 +6336,20 @@ impl TsMappedTypeAsClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsMappedTypeAsClauseSlots {
+        TsMappedTypeAsClauseSlots {
+            as_token: self.as_token(),
+            ty: self.ty(),
+        }
+    }
     pub fn as_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn ty(&self) -> SyntaxResult<TsType> { support::required_node(&self.syntax, 1usize) }
+}
+pub struct TsMappedTypeAsClauseSlots {
+    pub as_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsMappedTypeOptionalModifierClause {
@@ -3995,12 +6363,22 @@ impl TsMappedTypeOptionalModifierClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsMappedTypeOptionalModifierClauseSlots {
+        TsMappedTypeOptionalModifierClauseSlots {
+            operator_token: self.operator_token(),
+            question_mark_token: self.question_mark_token(),
+        }
+    }
     pub fn operator_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn question_mark_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
+}
+pub struct TsMappedTypeOptionalModifierClauseSlots {
+    pub operator_token: SyntaxResult<SyntaxToken>,
+    pub question_mark_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsMappedTypeReadonlyModifierClause {
@@ -4014,12 +6392,22 @@ impl TsMappedTypeReadonlyModifierClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsMappedTypeReadonlyModifierClauseSlots {
+        TsMappedTypeReadonlyModifierClauseSlots {
+            operator_token: self.operator_token(),
+            readonly_token: self.readonly_token(),
+        }
+    }
     pub fn operator_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn readonly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
+}
+pub struct TsMappedTypeReadonlyModifierClauseSlots {
+    pub operator_token: SyntaxResult<SyntaxToken>,
+    pub readonly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsMethodSignatureTypeMember {
@@ -4033,6 +6421,16 @@ impl TsMethodSignatureTypeMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsMethodSignatureTypeMemberSlots {
+        TsMethodSignatureTypeMemberSlots {
+            name: self.name(),
+            optional_token: self.optional_token(),
+            type_parameters: self.type_parameters(),
+            parameters: self.parameters(),
+            return_type_annotation: self.return_type_annotation(),
+            separator_token: self.separator_token(),
+        }
+    }
     pub fn name(&self) -> SyntaxResult<JsAnyObjectMemberName> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -4048,6 +6446,14 @@ impl TsMethodSignatureTypeMember {
     }
     pub fn separator_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 5usize) }
 }
+pub struct TsMethodSignatureTypeMemberSlots {
+    pub name: SyntaxResult<JsAnyObjectMemberName>,
+    pub optional_token: Option<SyntaxToken>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub parameters: SyntaxResult<JsParameters>,
+    pub return_type_annotation: Option<TsReturnTypeAnnotation>,
+    pub separator_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsNameWithTypeArguments {
     pub(crate) syntax: SyntaxNode,
@@ -4060,8 +6466,18 @@ impl TsNameWithTypeArguments {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsNameWithTypeArgumentsSlots {
+        TsNameWithTypeArgumentsSlots {
+            name: self.name(),
+            type_arguments: self.type_arguments(),
+        }
+    }
     pub fn name(&self) -> SyntaxResult<TsAnyName> { support::required_node(&self.syntax, 0usize) }
     pub fn type_arguments(&self) -> Option<TsTypeArguments> { support::node(&self.syntax, 1usize) }
+}
+pub struct TsNameWithTypeArgumentsSlots {
+    pub name: SyntaxResult<TsAnyName>,
+    pub type_arguments: Option<TsTypeArguments>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsNamedTupleTypeElement {
@@ -4075,6 +6491,15 @@ impl TsNamedTupleTypeElement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsNamedTupleTypeElementSlots {
+        TsNamedTupleTypeElementSlots {
+            dotdotdot_token: self.dotdotdot_token(),
+            name: self.name(),
+            question_mark_token: self.question_mark_token(),
+            colon_token: self.colon_token(),
+            ty: self.ty(),
+        }
+    }
     pub fn dotdotdot_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn name(&self) -> SyntaxResult<JsName> { support::required_node(&self.syntax, 1usize) }
     pub fn question_mark_token(&self) -> Option<SyntaxToken> {
@@ -4084,6 +6509,13 @@ impl TsNamedTupleTypeElement {
         support::required_token(&self.syntax, 3usize)
     }
     pub fn ty(&self) -> SyntaxResult<TsType> { support::required_node(&self.syntax, 4usize) }
+}
+pub struct TsNamedTupleTypeElementSlots {
+    pub dotdotdot_token: Option<SyntaxToken>,
+    pub name: SyntaxResult<JsName>,
+    pub question_mark_token: Option<SyntaxToken>,
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsNeverType {
@@ -4097,9 +6529,17 @@ impl TsNeverType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsNeverTypeSlots {
+        TsNeverTypeSlots {
+            never_token: self.never_token(),
+        }
+    }
     pub fn never_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsNeverTypeSlots {
+    pub never_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsNonNullAssertionExpression {
@@ -4113,12 +6553,22 @@ impl TsNonNullAssertionExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsNonNullAssertionExpressionSlots {
+        TsNonNullAssertionExpressionSlots {
+            expression: self.expression(),
+            excl_token: self.excl_token(),
+        }
+    }
     pub fn expression(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 0usize)
     }
     pub fn excl_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
+}
+pub struct TsNonNullAssertionExpressionSlots {
+    pub expression: SyntaxResult<JsAnyExpression>,
+    pub excl_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsNonPrimitiveType {
@@ -4132,9 +6582,17 @@ impl TsNonPrimitiveType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsNonPrimitiveTypeSlots {
+        TsNonPrimitiveTypeSlots {
+            object_token: self.object_token(),
+        }
+    }
     pub fn object_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsNonPrimitiveTypeSlots {
+    pub object_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsNullLiteralType {
@@ -4148,9 +6606,17 @@ impl TsNullLiteralType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsNullLiteralTypeSlots {
+        TsNullLiteralTypeSlots {
+            literal_token: self.literal_token(),
+        }
+    }
     pub fn literal_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsNullLiteralTypeSlots {
+    pub literal_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsNumberLiteralType {
@@ -4164,10 +6630,20 @@ impl TsNumberLiteralType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsNumberLiteralTypeSlots {
+        TsNumberLiteralTypeSlots {
+            minus_token: self.minus_token(),
+            literal_token: self.literal_token(),
+        }
+    }
     pub fn minus_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn literal_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
+}
+pub struct TsNumberLiteralTypeSlots {
+    pub minus_token: Option<SyntaxToken>,
+    pub literal_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsNumberType {
@@ -4181,9 +6657,17 @@ impl TsNumberType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsNumberTypeSlots {
+        TsNumberTypeSlots {
+            number_token: self.number_token(),
+        }
+    }
     pub fn number_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsNumberTypeSlots {
+    pub number_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsObjectType {
@@ -4197,6 +6681,13 @@ impl TsObjectType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsObjectTypeSlots {
+        TsObjectTypeSlots {
+            l_curly_token: self.l_curly_token(),
+            members: self.members(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn l_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -4204,6 +6695,11 @@ impl TsObjectType {
     pub fn r_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct TsObjectTypeSlots {
+    pub l_curly_token: SyntaxResult<SyntaxToken>,
+    pub members: TsTypeMemberList,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsOptionalPropertyAnnotation {
@@ -4217,12 +6713,22 @@ impl TsOptionalPropertyAnnotation {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsOptionalPropertyAnnotationSlots {
+        TsOptionalPropertyAnnotationSlots {
+            question_mark_token: self.question_mark_token(),
+            type_annotation: self.type_annotation(),
+        }
+    }
     pub fn question_mark_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn type_annotation(&self) -> Option<TsTypeAnnotation> {
         support::node(&self.syntax, 1usize)
     }
+}
+pub struct TsOptionalPropertyAnnotationSlots {
+    pub question_mark_token: SyntaxResult<SyntaxToken>,
+    pub type_annotation: Option<TsTypeAnnotation>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsOptionalTupleTypeElement {
@@ -4236,10 +6742,20 @@ impl TsOptionalTupleTypeElement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsOptionalTupleTypeElementSlots {
+        TsOptionalTupleTypeElementSlots {
+            ty: self.ty(),
+            question_mark_token: self.question_mark_token(),
+        }
+    }
     pub fn ty(&self) -> SyntaxResult<TsType> { support::required_node(&self.syntax, 0usize) }
     pub fn question_mark_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
+}
+pub struct TsOptionalTupleTypeElementSlots {
+    pub ty: SyntaxResult<TsType>,
+    pub question_mark_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsParenthesizedType {
@@ -4253,6 +6769,13 @@ impl TsParenthesizedType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsParenthesizedTypeSlots {
+        TsParenthesizedTypeSlots {
+            l_paren_token: self.l_paren_token(),
+            ty: self.ty(),
+            r_paren_token: self.r_paren_token(),
+        }
+    }
     pub fn l_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -4260,6 +6783,11 @@ impl TsParenthesizedType {
     pub fn r_paren_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct TsParenthesizedTypeSlots {
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsPropertyParameter {
@@ -4273,12 +6801,22 @@ impl TsPropertyParameter {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsPropertyParameterSlots {
+        TsPropertyParameterSlots {
+            accessibility: self.accessibility(),
+            formal_parameter: self.formal_parameter(),
+        }
+    }
     pub fn accessibility(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn formal_parameter(&self) -> SyntaxResult<JsAnyFormalParameter> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct TsPropertyParameterSlots {
+    pub accessibility: SyntaxResult<SyntaxToken>,
+    pub formal_parameter: SyntaxResult<JsAnyFormalParameter>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsPropertySignatureTypeMember {
@@ -4292,6 +6830,15 @@ impl TsPropertySignatureTypeMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsPropertySignatureTypeMemberSlots {
+        TsPropertySignatureTypeMemberSlots {
+            readonly_token: self.readonly_token(),
+            name: self.name(),
+            optional_token: self.optional_token(),
+            type_annotation: self.type_annotation(),
+            separator_token: self.separator_token(),
+        }
+    }
     pub fn readonly_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn name(&self) -> SyntaxResult<JsAnyObjectMemberName> {
         support::required_node(&self.syntax, 1usize)
@@ -4301,6 +6848,13 @@ impl TsPropertySignatureTypeMember {
         support::node(&self.syntax, 3usize)
     }
     pub fn separator_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 4usize) }
+}
+pub struct TsPropertySignatureTypeMemberSlots {
+    pub readonly_token: Option<SyntaxToken>,
+    pub name: SyntaxResult<JsAnyObjectMemberName>,
+    pub optional_token: Option<SyntaxToken>,
+    pub type_annotation: Option<TsTypeAnnotation>,
+    pub separator_token: Option<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsQualifiedName {
@@ -4314,11 +6868,23 @@ impl TsQualifiedName {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsQualifiedNameSlots {
+        TsQualifiedNameSlots {
+            left: self.left(),
+            dot_token: self.dot_token(),
+            right: self.right(),
+        }
+    }
     pub fn left(&self) -> SyntaxResult<TsAnyName> { support::required_node(&self.syntax, 0usize) }
     pub fn dot_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
     }
     pub fn right(&self) -> SyntaxResult<JsName> { support::required_node(&self.syntax, 2usize) }
+}
+pub struct TsQualifiedNameSlots {
+    pub left: SyntaxResult<TsAnyName>,
+    pub dot_token: SyntaxResult<SyntaxToken>,
+    pub right: SyntaxResult<JsName>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsReadonlyPropertyParameter {
@@ -4332,6 +6898,13 @@ impl TsReadonlyPropertyParameter {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsReadonlyPropertyParameterSlots {
+        TsReadonlyPropertyParameterSlots {
+            accessibility: self.accessibility(),
+            readonly_token: self.readonly_token(),
+            formal_parameter: self.formal_parameter(),
+        }
+    }
     pub fn accessibility(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn readonly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
@@ -4339,6 +6912,11 @@ impl TsReadonlyPropertyParameter {
     pub fn formal_parameter(&self) -> SyntaxResult<JsAnyFormalParameter> {
         support::required_node(&self.syntax, 2usize)
     }
+}
+pub struct TsReadonlyPropertyParameterSlots {
+    pub accessibility: Option<SyntaxToken>,
+    pub readonly_token: SyntaxResult<SyntaxToken>,
+    pub formal_parameter: SyntaxResult<JsAnyFormalParameter>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsReferenceType {
@@ -4352,8 +6930,18 @@ impl TsReferenceType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsReferenceTypeSlots {
+        TsReferenceTypeSlots {
+            name: self.name(),
+            type_arguments: self.type_arguments(),
+        }
+    }
     pub fn name(&self) -> SyntaxResult<TsAnyName> { support::required_node(&self.syntax, 0usize) }
     pub fn type_arguments(&self) -> Option<TsTypeArguments> { support::node(&self.syntax, 1usize) }
+}
+pub struct TsReferenceTypeSlots {
+    pub name: SyntaxResult<TsAnyName>,
+    pub type_arguments: Option<TsTypeArguments>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsRestTupleTypeElement {
@@ -4367,10 +6955,20 @@ impl TsRestTupleTypeElement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsRestTupleTypeElementSlots {
+        TsRestTupleTypeElementSlots {
+            dotdotdot_token: self.dotdotdot_token(),
+            ty: self.ty(),
+        }
+    }
     pub fn dotdotdot_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn ty(&self) -> SyntaxResult<TsType> { support::required_node(&self.syntax, 1usize) }
+}
+pub struct TsRestTupleTypeElementSlots {
+    pub dotdotdot_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsReturnTypeAnnotation {
@@ -4384,12 +6982,22 @@ impl TsReturnTypeAnnotation {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsReturnTypeAnnotationSlots {
+        TsReturnTypeAnnotationSlots {
+            colon_token: self.colon_token(),
+            ty: self.ty(),
+        }
+    }
     pub fn colon_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn ty(&self) -> SyntaxResult<TsAnyReturnType> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct TsReturnTypeAnnotationSlots {
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsAnyReturnType>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsSetterSignatureTypeMember {
@@ -4403,6 +7011,16 @@ impl TsSetterSignatureTypeMember {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsSetterSignatureTypeMemberSlots {
+        TsSetterSignatureTypeMemberSlots {
+            set_token: self.set_token(),
+            name: self.name(),
+            l_paren_token: self.l_paren_token(),
+            parameter: self.parameter(),
+            r_paren_token: self.r_paren_token(),
+            separator_token: self.separator_token(),
+        }
+    }
     pub fn set_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -4420,6 +7038,14 @@ impl TsSetterSignatureTypeMember {
     }
     pub fn separator_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 5usize) }
 }
+pub struct TsSetterSignatureTypeMemberSlots {
+    pub set_token: SyntaxResult<SyntaxToken>,
+    pub name: SyntaxResult<JsAnyObjectMemberName>,
+    pub l_paren_token: SyntaxResult<SyntaxToken>,
+    pub parameter: SyntaxResult<JsAnyFormalParameter>,
+    pub r_paren_token: SyntaxResult<SyntaxToken>,
+    pub separator_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsStringLiteralType {
     pub(crate) syntax: SyntaxNode,
@@ -4432,9 +7058,17 @@ impl TsStringLiteralType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsStringLiteralTypeSlots {
+        TsStringLiteralTypeSlots {
+            literal_token: self.literal_token(),
+        }
+    }
     pub fn literal_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsStringLiteralTypeSlots {
+    pub literal_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsStringType {
@@ -4448,9 +7082,17 @@ impl TsStringType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsStringTypeSlots {
+        TsStringTypeSlots {
+            string_token: self.string_token(),
+        }
+    }
     pub fn string_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsStringTypeSlots {
+    pub string_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsSymbolType {
@@ -4464,9 +7106,17 @@ impl TsSymbolType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsSymbolTypeSlots {
+        TsSymbolTypeSlots {
+            symbol_token: self.symbol_token(),
+        }
+    }
     pub fn symbol_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsSymbolTypeSlots {
+    pub symbol_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTemplateChunkElement {
@@ -4480,9 +7130,17 @@ impl TsTemplateChunkElement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTemplateChunkElementSlots {
+        TsTemplateChunkElementSlots {
+            template_chunk_token: self.template_chunk_token(),
+        }
+    }
     pub fn template_chunk_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsTemplateChunkElementSlots {
+    pub template_chunk_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTemplateElement {
@@ -4496,6 +7154,13 @@ impl TsTemplateElement {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTemplateElementSlots {
+        TsTemplateElementSlots {
+            dollar_curly_token: self.dollar_curly_token(),
+            ty: self.ty(),
+            r_curly_token: self.r_curly_token(),
+        }
+    }
     pub fn dollar_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -4503,6 +7168,11 @@ impl TsTemplateElement {
     pub fn r_curly_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct TsTemplateElementSlots {
+    pub dollar_curly_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
+    pub r_curly_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTemplateLiteralType {
@@ -4516,6 +7186,13 @@ impl TsTemplateLiteralType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTemplateLiteralTypeSlots {
+        TsTemplateLiteralTypeSlots {
+            l_tick_token: self.l_tick_token(),
+            elements: self.elements(),
+            r_tick_token: self.r_tick_token(),
+        }
+    }
     pub fn l_tick_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -4523,6 +7200,11 @@ impl TsTemplateLiteralType {
     pub fn r_tick_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct TsTemplateLiteralTypeSlots {
+    pub l_tick_token: SyntaxResult<SyntaxToken>,
+    pub elements: TsTemplateElementList,
+    pub r_tick_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsThisParameter {
@@ -4536,12 +7218,22 @@ impl TsThisParameter {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsThisParameterSlots {
+        TsThisParameterSlots {
+            this_token: self.this_token(),
+            type_annotation: self.type_annotation(),
+        }
+    }
     pub fn this_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn type_annotation(&self) -> Option<TsTypeAnnotation> {
         support::node(&self.syntax, 1usize)
     }
+}
+pub struct TsThisParameterSlots {
+    pub this_token: SyntaxResult<SyntaxToken>,
+    pub type_annotation: Option<TsTypeAnnotation>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsThisType {
@@ -4555,9 +7247,17 @@ impl TsThisType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsThisTypeSlots {
+        TsThisTypeSlots {
+            this_token: self.this_token(),
+        }
+    }
     pub fn this_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsThisTypeSlots {
+    pub this_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTupleType {
@@ -4571,6 +7271,13 @@ impl TsTupleType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTupleTypeSlots {
+        TsTupleTypeSlots {
+            l_brack_token: self.l_brack_token(),
+            elements: self.elements(),
+            r_brack_token: self.r_brack_token(),
+        }
+    }
     pub fn l_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -4578,6 +7285,11 @@ impl TsTupleType {
     pub fn r_brack_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct TsTupleTypeSlots {
+    pub l_brack_token: SyntaxResult<SyntaxToken>,
+    pub elements: TsTupleTypeElementList,
+    pub r_brack_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTypeAliasDeclaration {
@@ -4591,6 +7303,17 @@ impl TsTypeAliasDeclaration {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTypeAliasDeclarationSlots {
+        TsTypeAliasDeclarationSlots {
+            declare_token: self.declare_token(),
+            type_token: self.type_token(),
+            binding_identifier: self.binding_identifier(),
+            type_parameters: self.type_parameters(),
+            eq_token: self.eq_token(),
+            ty: self.ty(),
+            semicolon_token: self.semicolon_token(),
+        }
+    }
     pub fn declare_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn type_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 1usize)
@@ -4607,6 +7330,15 @@ impl TsTypeAliasDeclaration {
     pub fn ty(&self) -> SyntaxResult<TsType> { support::required_node(&self.syntax, 5usize) }
     pub fn semicolon_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 6usize) }
 }
+pub struct TsTypeAliasDeclarationSlots {
+    pub declare_token: Option<SyntaxToken>,
+    pub type_token: SyntaxResult<SyntaxToken>,
+    pub binding_identifier: SyntaxResult<TsIdentifierBinding>,
+    pub type_parameters: Option<TsTypeParameters>,
+    pub eq_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
+    pub semicolon_token: Option<SyntaxToken>,
+}
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTypeAnnotation {
     pub(crate) syntax: SyntaxNode,
@@ -4619,10 +7351,20 @@ impl TsTypeAnnotation {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTypeAnnotationSlots {
+        TsTypeAnnotationSlots {
+            colon_token: self.colon_token(),
+            ty: self.ty(),
+        }
+    }
     pub fn colon_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn ty(&self) -> SyntaxResult<TsType> { support::required_node(&self.syntax, 1usize) }
+}
+pub struct TsTypeAnnotationSlots {
+    pub colon_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTypeArguments {
@@ -4636,6 +7378,13 @@ impl TsTypeArguments {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTypeArgumentsSlots {
+        TsTypeArgumentsSlots {
+            l_angle_token: self.l_angle_token(),
+            ts_type_argument_list: self.ts_type_argument_list(),
+            r_angle_token: self.r_angle_token(),
+        }
+    }
     pub fn l_angle_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -4645,6 +7394,11 @@ impl TsTypeArguments {
     pub fn r_angle_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct TsTypeArgumentsSlots {
+    pub l_angle_token: SyntaxResult<SyntaxToken>,
+    pub ts_type_argument_list: TsTypeArgumentList,
+    pub r_angle_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTypeAssertionExpression {
@@ -4658,6 +7412,14 @@ impl TsTypeAssertionExpression {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTypeAssertionExpressionSlots {
+        TsTypeAssertionExpressionSlots {
+            l_angle_token: self.l_angle_token(),
+            ty: self.ty(),
+            r_angle_token: self.r_angle_token(),
+            expression: self.expression(),
+        }
+    }
     pub fn l_angle_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -4668,6 +7430,12 @@ impl TsTypeAssertionExpression {
     pub fn expression(&self) -> SyntaxResult<JsAnyExpression> {
         support::required_node(&self.syntax, 3usize)
     }
+}
+pub struct TsTypeAssertionExpressionSlots {
+    pub l_angle_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
+    pub r_angle_token: SyntaxResult<SyntaxToken>,
+    pub expression: SyntaxResult<JsAnyExpression>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTypeConstraintClause {
@@ -4681,10 +7449,20 @@ impl TsTypeConstraintClause {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTypeConstraintClauseSlots {
+        TsTypeConstraintClauseSlots {
+            extends_token: self.extends_token(),
+            ty: self.ty(),
+        }
+    }
     pub fn extends_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn ty(&self) -> SyntaxResult<TsType> { support::required_node(&self.syntax, 1usize) }
+}
+pub struct TsTypeConstraintClauseSlots {
+    pub extends_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTypeOperatorType {
@@ -4698,10 +7476,20 @@ impl TsTypeOperatorType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTypeOperatorTypeSlots {
+        TsTypeOperatorTypeSlots {
+            operator_token: self.operator_token(),
+            ty: self.ty(),
+        }
+    }
     pub fn operator_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn ty(&self) -> SyntaxResult<TsType> { support::required_node(&self.syntax, 1usize) }
+}
+pub struct TsTypeOperatorTypeSlots {
+    pub operator_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTypeParameter {
@@ -4715,6 +7503,13 @@ impl TsTypeParameter {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTypeParameterSlots {
+        TsTypeParameterSlots {
+            name: self.name(),
+            constraint: self.constraint(),
+            default: self.default(),
+        }
+    }
     pub fn name(&self) -> SyntaxResult<TsTypeParameterName> {
         support::required_node(&self.syntax, 0usize)
     }
@@ -4722,6 +7517,11 @@ impl TsTypeParameter {
         support::node(&self.syntax, 1usize)
     }
     pub fn default(&self) -> Option<TsDefaultTypeClause> { support::node(&self.syntax, 2usize) }
+}
+pub struct TsTypeParameterSlots {
+    pub name: SyntaxResult<TsTypeParameterName>,
+    pub constraint: Option<TsTypeConstraintClause>,
+    pub default: Option<TsDefaultTypeClause>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTypeParameterName {
@@ -4735,9 +7535,17 @@ impl TsTypeParameterName {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTypeParameterNameSlots {
+        TsTypeParameterNameSlots {
+            ident_token: self.ident_token(),
+        }
+    }
     pub fn ident_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsTypeParameterNameSlots {
+    pub ident_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTypeParameters {
@@ -4751,6 +7559,13 @@ impl TsTypeParameters {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTypeParametersSlots {
+        TsTypeParametersSlots {
+            l_angle_token: self.l_angle_token(),
+            items: self.items(),
+            r_angle_token: self.r_angle_token(),
+        }
+    }
     pub fn l_angle_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
@@ -4758,6 +7573,11 @@ impl TsTypeParameters {
     pub fn r_angle_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 2usize)
     }
+}
+pub struct TsTypeParametersSlots {
+    pub l_angle_token: SyntaxResult<SyntaxToken>,
+    pub items: TsTypeParameterList,
+    pub r_angle_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTypePredicate {
@@ -4771,6 +7591,14 @@ impl TsTypePredicate {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTypePredicateSlots {
+        TsTypePredicateSlots {
+            asserts_token: self.asserts_token(),
+            parameter_name: self.parameter_name(),
+            is_token: self.is_token(),
+            ty: self.ty(),
+        }
+    }
     pub fn asserts_token(&self) -> Option<SyntaxToken> { support::token(&self.syntax, 0usize) }
     pub fn parameter_name(&self) -> SyntaxResult<TsAnyTypePredicateParameterName> {
         support::required_node(&self.syntax, 1usize)
@@ -4779,6 +7607,12 @@ impl TsTypePredicate {
         support::required_token(&self.syntax, 2usize)
     }
     pub fn ty(&self) -> SyntaxResult<TsType> { support::required_node(&self.syntax, 3usize) }
+}
+pub struct TsTypePredicateSlots {
+    pub asserts_token: Option<SyntaxToken>,
+    pub parameter_name: SyntaxResult<TsAnyTypePredicateParameterName>,
+    pub is_token: SyntaxResult<SyntaxToken>,
+    pub ty: SyntaxResult<TsType>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsTypeofType {
@@ -4792,12 +7626,22 @@ impl TsTypeofType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsTypeofTypeSlots {
+        TsTypeofTypeSlots {
+            typeof_token: self.typeof_token(),
+            expression_name: self.expression_name(),
+        }
+    }
     pub fn typeof_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
     pub fn expression_name(&self) -> SyntaxResult<TsAnyName> {
         support::required_node(&self.syntax, 1usize)
     }
+}
+pub struct TsTypeofTypeSlots {
+    pub typeof_token: SyntaxResult<SyntaxToken>,
+    pub expression_name: SyntaxResult<TsAnyName>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsUndefinedType {
@@ -4811,9 +7655,17 @@ impl TsUndefinedType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsUndefinedTypeSlots {
+        TsUndefinedTypeSlots {
+            undefined_token: self.undefined_token(),
+        }
+    }
     pub fn undefined_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsUndefinedTypeSlots {
+    pub undefined_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsUnionType {
@@ -4827,10 +7679,20 @@ impl TsUnionType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsUnionTypeSlots {
+        TsUnionTypeSlots {
+            leading_separator_token_token: self.leading_separator_token_token(),
+            types: self.types(),
+        }
+    }
     pub fn leading_separator_token_token(&self) -> Option<SyntaxToken> {
         support::token(&self.syntax, 0usize)
     }
     pub fn types(&self) -> TsUnionTypeVariantList { support::list(&self.syntax, 1usize) }
+}
+pub struct TsUnionTypeSlots {
+    pub leading_separator_token_token: Option<SyntaxToken>,
+    pub types: TsUnionTypeVariantList,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsUnknownType {
@@ -4844,9 +7706,17 @@ impl TsUnknownType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsUnknownTypeSlots {
+        TsUnknownTypeSlots {
+            unknown_token: self.unknown_token(),
+        }
+    }
     pub fn unknown_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsUnknownTypeSlots {
+    pub unknown_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct TsVoidType {
@@ -4860,9 +7730,17 @@ impl TsVoidType {
     #[doc = r" or a match on [SyntaxNode::kind]"]
     #[inline]
     pub const unsafe fn new_unchecked(syntax: SyntaxNode) -> Self { Self { syntax } }
+    pub fn as_slots(&self) -> TsVoidTypeSlots {
+        TsVoidTypeSlots {
+            void_token: self.void_token(),
+        }
+    }
     pub fn void_token(&self) -> SyntaxResult<SyntaxToken> {
         support::required_token(&self.syntax, 0usize)
     }
+}
+pub struct TsVoidTypeSlots {
+    pub void_token: SyntaxResult<SyntaxToken>,
 }
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub enum AnyJsImportClause {

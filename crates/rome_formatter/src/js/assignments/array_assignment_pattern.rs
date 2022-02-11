@@ -4,19 +4,26 @@ use crate::{
 };
 
 use rslint_parser::ast::JsArrayAssignmentPattern;
+use rslint_parser::ast::JsArrayAssignmentPatternSlots;
 
 impl ToFormatElement for JsArrayAssignmentPattern {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
+        let JsArrayAssignmentPatternSlots {
+            l_brack_token,
+            elements,
+            r_brack_token,
+        } = self.as_slots();
+
         Ok(group_elements(formatter.format_delimited(
-            &self.l_brack_token()?,
+            &l_brack_token?,
             |open_token_trailing, close_token_leading| {
                 Ok(soft_block_indent(format_elements![
                     open_token_trailing,
-                    self.elements().format(formatter)?,
+                    elements.format(formatter)?,
                     close_token_leading,
                 ]))
             },
-            &self.r_brack_token()?,
+            &r_brack_token?,
         )?))
     }
 }

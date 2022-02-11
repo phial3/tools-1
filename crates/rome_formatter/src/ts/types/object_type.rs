@@ -3,13 +3,20 @@ use crate::{
     FormatResult, Formatter, ToFormatElement,
 };
 use rslint_parser::ast::TsObjectType;
+use rslint_parser::ast::TsObjectTypeSlots;
 
 impl ToFormatElement for TsObjectType {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
+        let TsObjectTypeSlots {
+            l_curly_token,
+            members,
+            r_curly_token,
+        } = self.as_slots();
+
         Ok(group_elements(formatter.format_delimited(
-            &self.l_curly_token()?,
+            &l_curly_token?,
             |open_token_trailing, close_token_leading| {
-                let list = self.members().to_format_element(formatter)?;
+                let list = members.to_format_element(formatter)?;
                 Ok(format_elements![
                     soft_line_break_or_space(),
                     soft_block_indent(format_elements![
@@ -20,7 +27,7 @@ impl ToFormatElement for TsObjectType {
                     soft_line_break_or_space()
                 ])
             },
-            &self.r_curly_token()?,
+            &r_curly_token?,
         )?))
     }
 }

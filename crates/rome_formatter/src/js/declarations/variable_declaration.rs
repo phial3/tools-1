@@ -5,13 +5,16 @@ use crate::{
 };
 
 use rslint_parser::ast::JsVariableDeclaration;
+use rslint_parser::ast::JsVariableDeclarationSlots;
 
 impl ToFormatElement for JsVariableDeclaration {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
+        let JsVariableDeclarationSlots { kind, declarators } = self.as_slots();
+
         Ok(format_elements![
-            self.kind().format(formatter)?,
+            kind.format(formatter)?,
             space_token(),
-            self.declarators().format(formatter)?,
+            declarators.format(formatter)?,
         ])
     }
 }

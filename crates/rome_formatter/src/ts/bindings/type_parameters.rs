@@ -3,12 +3,20 @@ use crate::{
     soft_line_break_or_space, token, FormatElement, FormatResult, Formatter, ToFormatElement,
 };
 use rslint_parser::ast::TsTypeParameters;
+use rslint_parser::ast::TsTypeParametersSlots;
+
 impl ToFormatElement for TsTypeParameters {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
-        let items = formatter.format_separated(self.items(), || token(","))?;
+        let TsTypeParametersSlots {
+            l_angle_token,
+            items,
+            r_angle_token,
+        } = self.as_slots();
+
+        let items = formatter.format_separated(items, || token(","))?;
 
         Ok(group_elements(formatter.format_delimited(
-            &self.l_angle_token()?,
+            &l_angle_token?,
             |open_token_trailing, close_token_leading| {
                 Ok(format_elements![
                     soft_line_break(),
@@ -20,7 +28,7 @@ impl ToFormatElement for TsTypeParameters {
                     soft_line_break()
                 ])
             },
-            &self.r_angle_token()?,
+            &r_angle_token?,
         )?))
     }
 }

@@ -6,33 +6,41 @@ use crate::{
 };
 
 use rslint_parser::ast::JsIfStatement;
+use rslint_parser::ast::JsIfStatementSlots;
 
 impl ToFormatElement for JsIfStatement {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
-        let else_caluse = self
-            .else_clause()
-            .format_with_or_empty(formatter, |else_clause| {
-                format_elements![space_token(), else_clause]
-            })?;
+        let JsIfStatementSlots {
+            if_token,
+            l_paren_token,
+            test,
+            r_paren_token,
+            consequent,
+            else_clause,
+        } = self.as_slots();
+
+        let else_caluse = else_clause.format_with_or_empty(formatter, |else_clause| {
+            format_elements![space_token(), else_clause]
+        })?;
 
         Ok(format_elements![
             group_elements(format_elements![
-                self.if_token().format(formatter)?,
+                if_token.format(formatter)?,
                 space_token(),
                 group_elements(formatter.format_delimited(
-                    &self.l_paren_token()?,
+                    &l_paren_token?,
                     |open_token_trailing, close_token_leading| Ok(soft_block_indent(
                         format_elements![
                             open_token_trailing,
-                            self.test().format(formatter)?,
+                            test.format(formatter)?,
                             close_token_leading
                         ]
                     )),
-                    &self.r_paren_token()?,
+                    &r_paren_token?,
                 )?),
                 space_token(),
             ]),
-            self.consequent().format(formatter)?,
+            consequent.format(formatter)?,
             else_caluse
         ])
     }

@@ -5,10 +5,17 @@ use crate::{
 };
 
 use rslint_parser::ast::JsObjectExpression;
+use rslint_parser::ast::JsObjectExpressionSlots;
 
 impl ToFormatElement for JsObjectExpression {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
-        let members = self.members().format(formatter)?;
+        let JsObjectExpressionSlots {
+            l_curly_token,
+            members,
+            r_curly_token,
+        } = self.as_slots();
+
+        let members = members.format(formatter)?;
 
         let space = if members.is_empty() {
             empty_element()
@@ -17,7 +24,7 @@ impl ToFormatElement for JsObjectExpression {
         };
 
         Ok(group_elements(formatter.format_delimited(
-            &self.l_curly_token()?,
+            &l_curly_token?,
             |open_token_trailing, close_token_leading| {
                 Ok(format_elements!(
                     space.clone(),
@@ -29,7 +36,7 @@ impl ToFormatElement for JsObjectExpression {
                     space,
                 ))
             },
-            &self.r_curly_token()?,
+            &r_curly_token?,
         )?))
     }
 }

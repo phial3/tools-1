@@ -5,13 +5,20 @@ use crate::{
 };
 
 use rslint_parser::ast::JsStaticMemberExpression;
+use rslint_parser::ast::JsStaticMemberExpressionSlots;
 
 impl ToFormatElement for JsStaticMemberExpression {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
+        let JsStaticMemberExpressionSlots {
+            object,
+            operator,
+            member,
+        } = self.as_slots();
+
         Ok(group_elements(format_elements![
-            self.object().format(formatter)?,
-            self.operator().format(formatter)?,
-            self.member().format(formatter)?,
+            object.format(formatter)?,
+            operator.format(formatter)?,
+            member.format(formatter)?,
         ]))
     }
 }

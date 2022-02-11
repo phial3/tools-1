@@ -5,10 +5,13 @@ use crate::format_element::normalize_newlines;
 use crate::{format_element::Token, FormatElement, FormatResult, Formatter, ToFormatElement};
 
 use rslint_parser::ast::JsStringLiteralExpression;
+use rslint_parser::ast::JsStringLiteralExpressionSlots;
 
 impl ToFormatElement for JsStringLiteralExpression {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
-        let value_token = self.value_token()?;
+        let JsStringLiteralExpressionSlots { value_token } = self.as_slots();
+
+        let value_token = value_token?;
         let quoted = value_token.text_trimmed();
 
         // uses single quotes

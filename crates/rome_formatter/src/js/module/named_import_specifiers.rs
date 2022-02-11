@@ -5,13 +5,20 @@ use crate::{
 };
 
 use rslint_parser::ast::JsNamedImportSpecifiers;
+use rslint_parser::ast::JsNamedImportSpecifiersSlots;
 
 impl ToFormatElement for JsNamedImportSpecifiers {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
-        let specifiers = self.specifiers().format(formatter)?;
+        let JsNamedImportSpecifiersSlots {
+            l_curly_token,
+            specifiers,
+            r_curly_token,
+        } = self.as_slots();
+
+        let specifiers = specifiers.format(formatter)?;
 
         Ok(group_elements(formatter.format_delimited(
-            &self.l_curly_token()?,
+            &l_curly_token?,
             |leading, trailing| {
                 let space = if leading.is_empty() && specifiers.is_empty() && trailing.is_empty() {
                     empty_element()
@@ -25,7 +32,7 @@ impl ToFormatElement for JsNamedImportSpecifiers {
                     space,
                 ))
             },
-            &self.r_curly_token()?,
+            &r_curly_token?,
         )?))
     }
 }

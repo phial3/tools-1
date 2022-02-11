@@ -5,15 +5,22 @@ use crate::{
 };
 
 use rslint_parser::ast::JsBinaryExpression;
+use rslint_parser::ast::JsBinaryExpressionSlots;
 
 impl ToFormatElement for JsBinaryExpression {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
+        let JsBinaryExpressionSlots {
+            left,
+            operator,
+            right,
+        } = self.as_slots();
+
         Ok(format_elements![
-            self.left().format(formatter)?,
+            left.format(formatter)?,
             space_token(),
-            self.operator().format(formatter)?,
+            operator.format(formatter)?,
             space_token(),
-            self.right().format(formatter)?,
+            right.format(formatter)?,
         ])
     }
 }

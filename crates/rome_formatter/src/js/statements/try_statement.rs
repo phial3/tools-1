@@ -5,15 +5,22 @@ use crate::{
 };
 
 use rslint_parser::ast::JsTryStatement;
+use rslint_parser::ast::JsTryStatementSlots;
 
 impl ToFormatElement for JsTryStatement {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
+        let JsTryStatementSlots {
+            try_token,
+            body,
+            catch_clause,
+        } = self.as_slots();
+
         Ok(format_elements![
-            self.try_token().format(formatter)?,
+            try_token.format(formatter)?,
             space_token(),
-            self.body().format(formatter)?,
+            body.format(formatter)?,
             space_token(),
-            self.catch_clause().format(formatter)?,
+            catch_clause.format(formatter)?,
         ])
     }
 }

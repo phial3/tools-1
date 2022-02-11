@@ -5,13 +5,19 @@ use crate::{
 };
 
 use rslint_parser::ast::JsElseClause;
+use rslint_parser::ast::JsElseClauseSlots;
 
 impl ToFormatElement for JsElseClause {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
+        let JsElseClauseSlots {
+            else_token,
+            alternate,
+        } = self.as_slots();
+
         Ok(format_elements![
-            self.else_token().format(formatter)?,
+            else_token.format(formatter)?,
             space_token(),
-            self.alternate().format(formatter)?,
+            alternate.format(formatter)?,
         ])
     }
 }

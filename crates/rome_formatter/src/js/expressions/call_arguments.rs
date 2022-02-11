@@ -4,19 +4,26 @@ use crate::{
 };
 
 use rslint_parser::ast::JsCallArguments;
+use rslint_parser::ast::JsCallArgumentsSlots;
 
 impl ToFormatElement for JsCallArguments {
     fn to_format_element(&self, formatter: &Formatter) -> FormatResult<FormatElement> {
+        let JsCallArgumentsSlots {
+            l_paren_token,
+            args,
+            r_paren_token,
+        } = self.as_slots();
+
         Ok(group_elements(formatter.format_delimited(
-            &self.l_paren_token()?,
+            &l_paren_token?,
             |open_token_trailing, close_token_leading| {
                 Ok(soft_block_indent(format_elements![
                     open_token_trailing,
-                    self.args().format(formatter)?,
+                    args.format(formatter)?,
                     close_token_leading
                 ]))
             },
-            &self.r_paren_token()?,
+            &r_paren_token?,
         )?))
     }
 }
