@@ -40,7 +40,7 @@ JsModule {
                     name: JsLiteralMemberName {
                         value: IDENT@34..40 "method" [] [],
                     },
-                    question_mark_token: missing (required),
+                    question_mark_token: missing (optional),
                     type_parameters: missing (optional),
                     parameters: JsParameters {
                         l_paren_token: L_PAREN@40..41 "(" [] [],
@@ -128,7 +128,7 @@ JsModule {
                     name: JsLiteralMemberName {
                         value: IDENT@109..115 "method" [] [],
                     },
-                    question_mark_token: missing (required),
+                    question_mark_token: missing (optional),
                     type_parameters: missing (optional),
                     parameters: JsParameters {
                         l_paren_token: L_PAREN@115..116 "(" [] [],
@@ -207,7 +207,7 @@ JsModule {
                     name: JsLiteralMemberName {
                         value: IDENT@180..186 "method" [] [],
                     },
-                    question_mark_token: missing (required),
+                    question_mark_token: missing (optional),
                     type_parameters: missing (optional),
                     parameters: JsParameters {
                         l_paren_token: L_PAREN@186..187 "(" [] [],
@@ -292,7 +292,7 @@ JsModule {
                     name: JsLiteralMemberName {
                         value: IDENT@258..264 "method" [] [],
                     },
-                    question_mark_token: missing (required),
+                    question_mark_token: missing (optional),
                     type_parameters: missing (optional),
                     parameters: JsParameters {
                         l_paren_token: L_PAREN@264..265 "(" [] [],
@@ -390,7 +390,7 @@ JsModule {
                     name: JsLiteralMemberName {
                         value: IDENT@340..346 "method" [] [],
                     },
-                    question_mark_token: missing (required),
+                    question_mark_token: missing (optional),
                     type_parameters: missing (optional),
                     parameters: JsParameters {
                         l_paren_token: L_PAREN@346..347 "(" [] [],
@@ -486,7 +486,7 @@ JsModule {
                     name: JsLiteralMemberName {
                         value: IDENT@425..431 "method" [] [],
                     },
-                    question_mark_token: missing (required),
+                    question_mark_token: missing (optional),
                     type_parameters: missing (optional),
                     parameters: JsParameters {
                         l_paren_token: L_PAREN@431..432 "(" [] [],

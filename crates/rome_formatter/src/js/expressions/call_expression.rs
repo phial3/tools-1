@@ -16,8 +16,9 @@ impl ToFormatElement for JsCallExpression {
 
         let name = callee.format(formatter)?;
         let option = optional_chain_token_token.format_or_empty(formatter)?;
+        let type_arguments = type_arguments.format_or_empty(formatter)?;
         let arguments = arguments.format(formatter)?;
 
-        Ok(format_elements![name, option, arguments])
+        Ok(format_elements![name, option, type_arguments, arguments])
     }
 }

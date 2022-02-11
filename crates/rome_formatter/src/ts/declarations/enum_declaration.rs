@@ -18,6 +18,9 @@ impl ToFormatElement for TsEnumDeclaration {
             r_curly_token,
         } = self.as_slots();
 
+        let declare_token = declare_token.format_with_or_empty(formatter, |declare_token| {
+            format_elements![declare_token, space_token()]
+        })?;
         let const_token = const_token.format_with_or_empty(formatter, |const_token| {
             format_elements![const_token, space_token()]
         })?;
@@ -43,6 +46,12 @@ impl ToFormatElement for TsEnumDeclaration {
             &r_curly_token?,
         )?);
 
-        Ok(format_elements![const_token, enum_token, id, list])
+        Ok(format_elements![
+            declare_token,
+            const_token,
+            enum_token,
+            id,
+            list,
+        ])
     }
 }
