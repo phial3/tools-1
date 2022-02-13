@@ -208,7 +208,7 @@ pub(crate) fn parse_statement(p: &mut Parser, context: StatementContext) -> Pars
         T![function] => parse_function_declaration(p, context),
         T![class] => parse_class_declaration(p, context),
         T![ident] if is_at_ts_abstract_class_statement(p, LineBreak::DoCheck) => {
-            let mut abstract_class = parse_ts_abstract_class_statement(p, context);
+            let mut abstract_class = parse_ts_abstract_class_statement(p);
 
             // test_err abstract_class_in_js
             // abstract class A {}
