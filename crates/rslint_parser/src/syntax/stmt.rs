@@ -208,7 +208,17 @@ pub(crate) fn parse_statement(p: &mut Parser, context: StatementContext) -> Pars
         T![function] => parse_function_declaration(p, context),
         T![class] => parse_class_declaration(p, context),
         T![ident] if is_at_ts_abstract_class_statement(p, LineBreak::DoCheck) => {
-            parse_ts_abstract_class_statement(p, context)
+            let mut abstract_class = parse_ts_abstract_class_statement(p, context);
+
+            // test_err abstract_class_in_js
+            // abstract class A {}
+            abstract_class.map(|mut abstract_class| {
+                abstract_class.err_if_not_ts(
+                    p,
+                    "`abstract` classes can only be declared in TypeScript files",
+                );
+                abstract_class
+            })
         }
         T![ident] if is_at_async_function(p, LineBreak::DoCheck) => {
             parse_function_declaration(p, context)
