@@ -55,6 +55,13 @@ pub(crate) fn is_nth_at_declaration_clause(p: &Parser, n: usize) -> bool {
         return true;
     }
 
+    if is_nth_at_contextual_keyword(p, n, "abstract")
+        && !p.has_linebreak_before_n(n + 1)
+        && p.nth_at(n + 1, T![class])
+    {
+        return true;
+    }
+
     false
 }
 
@@ -68,6 +75,9 @@ pub(crate) fn parse_declaration_clause(p: &mut Parser, ambient: bool) -> ParsedS
             }
         }
         T![class] => parse_class_declaration(p, StatementContext::StatementList),
+        T![ident] if is_at_contextual_keyword(p, "abstract") => {
+            parse_class_declaration(p, StatementContext::StatementList)
+        }
         T![const] => {
             if p.nth_at(1, T![enum]) {
                 parse_ts_enum_declaration(p)
